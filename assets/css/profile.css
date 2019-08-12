@@ -1,0 +1,17 @@
+.profile {
+	width: 60%;
+	margin: auto;
+	margin-top: 70px;
+}
+
+.profile .avatar {
+	width: 70%;
+	margin: auto;
+	border-radius: 50%;
+}
+
+@media screen and (max-width: 600px) {
+	.profile {
+		width: 80%;
+	}
+}

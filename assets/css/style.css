@@ -1,0 +1,109 @@
+body {
+	background: #FAFAFA;
+}
+
+img {
+	width: 90%;
+	height: auto;
+	margin: auto;
+}
+
+.homepage {
+	width: 100vw;
+	height: 100vh;
+}
+
+.homepage .row {
+	margin: 0;
+	width: 60%;
+	margin: auto;
+	padding-top: 150px;
+}
+
+.signin-form {
+	width: 80%;
+	margin: auto;
+	margin-top: 20px;
+	padding: 25px 50px 25px 50px;
+	background: #FFFFFF;
+	border: 1px solid #CCCCCC;
+}
+
+.signin-logo {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.signin-form.loggedIn {
+	text-align: center;
+}
+
+.signin-form .avatar {
+	width: 50%;
+	height: auto;
+	margin: auto;
+	border-radius: 50%;
+}
+
+.signin-form .signin-logo h1 {
+	font-size: 28px;
+}
+
+.signin-form .signin-links {
+	text-align: center;
+}
+
+.container {
+	width: 80%;
+	margin: auto;
+}
+
+.container .row .image {
+	height: 250px;
+	width: auto;
+	margin: 25px;
+	overflow: hidden;
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+}
+
+.container .row .image img {
+	width: 100%;
+	height: auto;
+	text-align: center;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+footer {
+	width: 100%;
+	padding: 15px 0px;
+}
+
+footer .row {
+	margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+	.homepage {
+		height: auto;
+	}
+
+	.homepage .row {
+		width: 80%;
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+
+	.row img {
+		width: 100%;
+	}
+
+	.signin-form {
+		width: 100%;
+		padding: 10px 15px 10px 15px;
+	}
+}
