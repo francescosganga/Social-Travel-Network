@@ -3,7 +3,13 @@ include("functions.php");
 $AV = new AV;
 
 $userData = $AV->userData($AV->escapeString($_REQUEST['param']));
-if(!isset($_REQUEST['param']) and $userData == false)
+if(isset($_REQUEST['verify']) and strlen($_REQUEST['verify']) == 32) {
+	$verifyHash = $AV->escapeString($_REQUEST['verify']);
+	$AV->verifyUser($verifyHash);
+	$AV->redirect("/");
+}
+
+if(isset($_REQUEST['param']) and $userData == false)
 	$AV->redirect("/");
 
 $AV->parseHTMLContent();

@@ -63,6 +63,7 @@ CREATE TABLE `av_users` (
   `phone` varchar(255) NOT NULL,
   `avatar` varchar(255) NOT NULL,
   `last_login` varchar(255) DEFAULT NULL,
+  `login_hash` varchar(255) NOT NULL,
   `verified` varchar(255) NOT NULL,
   `verify_hash` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

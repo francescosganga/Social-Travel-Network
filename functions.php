@@ -27,8 +27,9 @@ class AV {
 			die("Language file not exists.");
 		}
 
-		if($this->userLoggedIn()) {
+		if($this->userLoggedIn() != false) {
 			$this->currentUser = $this->currentUser();
+		} else {
 		}
 	}
 
@@ -95,9 +96,13 @@ class AV {
 			$verifyHash = md5($name . $username . $city . $username . $password . $email . $phone . time());
 			$q = $this->MySQLi->query("INSERT INTO {$this->config['mysql']['table_prefix']}users (name, surname, city, username, password, email, phone, avatar, verified, verify_hash) VALUES (\"{$name}\", \"{$surname}\", \"{$city}\", \"{$username}\", \"{$password}\", \"{$email}\", \"{$phone}\", \"assets/images/no-avatar.png\", 0, \"{$verifyHash}\")") or die($this->MySQLi->error);
 
+			$this->language['mail-verification-content'] = str_replace("{{url}}", $this->config['site_url'], $this->language['mail-verification-content']);
+			$this->language['mail-verification-content'] = str_replace("{{username}}", $username, $this->language['mail-verification-content']);
+			$this->language['mail-verification-content'] = str_replace("{{verify_hash}}", $verifyHash, $this->language['mail-verification-content']);
+
 			if(!$q)
 				return false;
-			elseif(!$this->sendMail($email, "Conferma Indirizzo Email", "Hash per verificare: {$verifyHash}"))
+			elseif(!$this->sendMail($email, $this->language['mail-verificaiton-subject'], $this->language['mail-verification-content']))
 				return false;
 			else
 				return true;
@@ -110,34 +115,56 @@ class AV {
 		header("Location: " . $this->config['site_url'] . $path);
 	}
 
+	public function checkLoginHash($loginHash) {
+		$q = $this->MySQLi->query("SELECT id FROM {$this->config['mysql']['table_prefix']}users WHERE login_hash = \"{$loginHash}\"") or die($this->MySQLi->error);
+		if($q->num_rows) {
+			$r = $q->fetch_array(MYSQLI_ASSOC);
+			return $r['id'];
+		}
+
+		return false;
+	}
+
 	public function userLoggedIn() {
-		if(isset($_SESSION['loggedId']))
-			return true;
+		if(isset($_SESSION['login_hash']) and $this->checkLoginHash($_SESSION['login_hash']))
+			return $this->checkLoginHash($_SESSION['login_hash']);
 
 		return false;
 	}
 
 	public function currentUser() {
-		if(!$this->userLoggedIn())
+		$id = $this->userLoggedIn();
+		if($id == false)
 			return false;
-		$id = $_SESSION['loggedId'];
+
 		$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}users WHERE id=\"{$id}\"") or die($this->MySQLi->error);
 		return $q->fetch_array(MYSQLI_ASSOC);
 	}
 
-	public function setSession($username, $password) {
-		$q = $this->MySQLi->query("SELECT id FROM {$this->config['mysql']['table_prefix']}users WHERE username=\"{$username}\" and password=\"{$password}\"") or die($this->MySQLi->error);
-		$r = $q->fetch_array(MYSQLI_ASSOC);
-		$_SESSION['loggedId'] = $r['id'];
+	public function setSession($session_name, $session_value) {
+		$_SESSION[$session_name] = $session_value;
 		return true;
 	}
 
+	public function verifyUser($verifyHash) {
+		$q = $this->MySQLi->query("SELECT id FROM {$this->config['mysql']['table_prefix']}users WHERE verify_hash=\"{$verifyHash}\"") or die($this->MySQLi->error);
+		if($q->num_rows) {
+			$q = $this->MySQLi->query("UPDATE {$this->config['mysql']['table_prefix']}users SET verified = \"1\" WHERE verify_hash=\"{$verifyHash}\"") or die($this->MySQLi->error);
+
+			return true;
+		}
+
+		return false;
+	}
+
 	public function login($username, $password) {
-		$q = $this->MySQLi->query("SELECT id FROM {$this->config['mysql']['table_prefix']}users WHERE username=\"{$username}\" and password=\"{$password}\"") or die($this->MySQLi->error);
+		$q = $this->MySQLi->query("SELECT id FROM {$this->config['mysql']['table_prefix']}users WHERE username=\"{$username}\" and password=\"{$password}\" and verified = \"1\"") or die($this->MySQLi->error);
 		if($q->num_rows) {
 			$r = $q->fetch_array(MYSQLI_ASSOC);
-			$q = $this->MySQLi->query("UPDATE {$this->config['mysql']['table_prefix']}users SET last_login = \"" . time() . "\" WHERE id=\"{$r['id']}\"") or die($this->MySQLi->error);
-			return true;
+			$login_hash = md5($username . time());
+			$q = $this->MySQLi->query("UPDATE {$this->config['mysql']['table_prefix']}users SET last_login = \"" . time() . "\", login_hash = \"{$login_hash}\" WHERE id=\"{$r['id']}\"") or die($this->MySQLi->error);
+
+			return $login_hash;
 		} else
 			return false;
 	}
