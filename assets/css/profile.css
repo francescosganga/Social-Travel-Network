@@ -5,9 +5,67 @@
 }
 
 .profile .avatar {
+	text-align: center;
+}
+
+.profile .avatar img {
 	width: 70%;
 	margin: auto;
 	border-radius: 50%;
+}
+
+.row.feed {
+	margin-top: 30px;
+}
+
+.trips .trip {
+	position: relative;
+	height: 250px;
+	padding: 15px;
+}
+
+.trips .trip .background {
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	text-align: center;
+}
+
+.trips .trip .background .overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.trips .trip .background img {
+	width: auto;
+	height: 100%;
+}
+
+.trips .trip .info {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+
+	transform: translate(-50%, -50%);
+
+	text-align: center;
+}
+
+.trips .trip .info .title {
+	font-size: 22px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+.trips .trip .info .destination {
+	font-size: 13px;
+	font-style: italic;
+	color: #FFFFFF;
 }
 
 @media screen and (max-width: 600px) {

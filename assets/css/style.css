@@ -79,7 +79,9 @@ img {
 }
 
 footer {
-	width: 100%;
+	width: 60%;
+	margin-top: 30px;
+	margin: auto;
 	padding: 15px 0px;
 }
 
@@ -100,6 +102,10 @@ footer .row {
 
 	.row img {
 		width: 100%;
+	}
+
+	footer {
+		width: 80%;
 	}
 
 	.signin-form {

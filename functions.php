@@ -34,7 +34,7 @@ class AV {
 	}
 
 	public function userData($username) {
-		$q = $this->MySQLi->query("SELECT name, surname, city, username, avatar FROM {$this->config['mysql']['table_prefix']}users WHERE username=\"{$username}\"") or die($this->MySQLi->error);
+		$q = $this->MySQLi->query("SELECT id, name, surname, city, username, avatar FROM {$this->config['mysql']['table_prefix']}users WHERE username=\"{$username}\"") or die($this->MySQLi->error);
 		if(!$q->num_rows)
 			return false;
 
@@ -130,6 +130,18 @@ class AV {
 			return $this->checkLoginHash($_SESSION['login_hash']);
 
 		return false;
+	}
+
+	public function getTrips($user_id) {
+		$trips = Array();
+
+		$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}trips WHERE user_id = {$user_id}") or die($this->MySQLi->error);
+
+		while($r = $q->fetch_array(MYSQLI_ASSOC))
+			$trips[] = $r;
+
+		return $trips;
+
 	}
 
 	public function currentUser() {

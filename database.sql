@@ -69,6 +69,22 @@ CREATE TABLE `av_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Struttura della tabella `av_trips`
+--
+
+CREATE TABLE `av_trips` (
+  `id` int(5) NOT NULL,
+  `user_id` int(5) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `from_city` varchar(255) NOT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `country` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `date` int(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
 -- Indici per le tabelle scaricate
 --
 
