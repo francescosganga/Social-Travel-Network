@@ -5,10 +5,10 @@ if(!$AV->userLoggedIn())
 	$AV->redirect("/");
 
 if($AV->currentUser['id'] != 1)
-	die("Piattaforma in manutenzione");
+	die("{lang['maintenance-mode']}");
 
 $AV->parseHTMLContent();
-$AV->templateHeader("Bentornato {user['name']} su {{website_name}}");
+$AV->templateHeader("{lang['welcome-back']} {user['name']} {lang['on']} {{website_name}}");
 ?>
 
 <?php $AV->templateFooter(); ?>

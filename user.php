@@ -7,7 +7,7 @@ if(!isset($_REQUEST['param']) and $userData == false)
 	$AV->redirect("/");
 
 $AV->parseHTMLContent();
-$AV->templateHeader("Profilo di {$userData['username']}", "", Array("profile"));
+$AV->templateHeader("{lang['profile-of']} {$userData['username']}", "", Array("profile"));
 ?>
 <div class="profile">
 	<div class="row">
@@ -22,13 +22,13 @@ $AV->templateHeader("Profilo di {$userData['username']}", "", Array("profile"));
 			</div>
 			<div class="row">
 				<div class="col-md-4">
-					<strong>0</strong> viaggi
+					<strong>0</strong> {lang['trips']}
 				</div>
 				<div class="col-md-4">
-					<strong>0</strong> follower
+					<strong>0</strong> {lang['follower']}
 				</div>
 				<div class="col-md-4">
-					<strong>0</strong> following
+					<strong>0</strong> {lang['following']}
 				</div>
 			</div>
 			<br />

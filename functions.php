@@ -4,7 +4,9 @@ session_start();
 class AV {
 	private $config;
 	private $MySQLi;
+
 	public $currentUser = false;
+	public $language;
 
 	public function __construct() {
 		include("config.inc.php");
@@ -16,6 +18,14 @@ class AV {
 		$q = $this->MySQLi->query("SELECT option_name, option_value FROM {$this->config['mysql']['table_prefix']}options");
 		while($r = $q->fetch_array(MYSQLI_ASSOC))
 			$this->config[$r['option_name']] = $r['option_value'];
+
+		//check if language file exists
+		if(file_exists("{$this->config['site_path']}/languages/{$this->config['site_language']}.php")) {
+			include("{$this->config['site_path']}/languages/{$this->config['site_language']}.php");
+			$this->language = $lang;
+		} else {
+			die("Language file not exists.");
+		}
 
 		if($this->userLoggedIn()) {
 			$this->currentUser = $this->currentUser();
@@ -53,6 +63,14 @@ class AV {
 			$content = str_replace("{{url}}", $this->config['site_url'], $content);
 			$content = str_replace("{{website_name}}", $this->config['site_name'], $content);
 
+			//language system
+			$content = preg_replace_callback("/\{lang\[\'(.*?)\'\]\}/", function($matches) {
+				if(isset($this->language[$matches[1]]))
+					return $this->language[$matches[1]];
+				else
+					return $matches[1];
+			}, $content);
+
 			if($this->currentUser != false) {
 				$content = preg_replace_callback("/\{user\[\'(.*?)\'\]\}/", function($matches) {
 					return $this->currentUser[$matches[1]];
@@ -69,7 +87,7 @@ class AV {
 
 	public function userRegistration($name, $surname, $city, $username, $password, $email, $phone) {
 		$alreadyExists = false;
-		$q = $this->MySQLi->query("SELECT id FROM {$this->config['mysql']['table_prefix']}users WHERE email=\"{$email}\" or phone=\"{$phone}\"");
+		$q = $this->MySQLi->query("SELECT id FROM {$this->config['mysql']['table_prefix']}users WHERE email=\"{$email}\" or phone=\"{$phone}\" or username=\"{$username}\"");
 		if($q->num_rows)
 			$alreadyExists = true;
 

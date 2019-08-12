@@ -39,17 +39,17 @@ $AV->parseHTMLContent();
 							<img src="{{url}}/assets/images/logo.png" />
 						</div>
 						<form action="{{url}}/login/" method="POST">
-							<input type="text" name="username" class="form-control input" placeholder="Username" /><br />
-							<input type="password" name="password" class="form-control input" placeholder="Password" /><br />
-							<input type="checkbox" name="remember" class="checkbox" /> Ricordami<br /><br />
-							<button class="btn btn-primary btn-block">Accedi</button>
+							<input type="text" name="username" class="form-control input" placeholder="{lang['username']}" /><br />
+							<input type="password" name="password" class="form-control input" placeholder="{lang['password']}" /><br />
+							<input type="checkbox" name="remember" class="checkbox" /> {lang['remember-me']}<br /><br />
+							<button class="btn btn-primary btn-block">{lang['login']}</button>
 							<br />
 							<p style="text-align: center">oppure</p>
-							<a href="{{url}}/registrazione/" class="btn btn-dark btn-block">Registrati</a>
+							<a href="{{url}}/registrazione/" class="btn btn-dark btn-block">{lang['registration']}</a>
 						</form>
 						<hr />
 						<div class="signin-links">
-							<a href="#">Hai dimenticato la password?</a><br />
+							<a href="#">{lang['lost-password']}</a><br />
 						</div>
 					</div>
 					<?php else: ?>
@@ -57,14 +57,14 @@ $AV->parseHTMLContent();
 						<div class="signin-logo">
 							<img src="{{url}}/assets/images/logo.png" />
 						</div>
-						Continua come<br />
+						{lang['login-as']}<br />
 						<br />
 						<img class="avatar" src="{{url}}/{user['avatar']}" /><br />
 						<br />
 						<a href="{{url}}/dashboard/" class="btn btn-primary btn-block">{user['username']}</a><br />
-						oppure
+						{lang['or']}
 						<br /><br />
-						<a href="{{url}}/logout/" class="btn btn-secondary btn-block">Esci</a>
+						<a href="{{url}}/logout/" class="btn btn-secondary btn-block">{lang['logout']}</a>
 					</div>
 					<?php endif; ?>
 				</div>

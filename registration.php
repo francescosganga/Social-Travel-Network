@@ -60,23 +60,23 @@ if(isset($_POST['name'])
 				<div class="signin-logo">
 					<img src="{{url}}/assets/images/logo.png" />
 				</div>
-				<h1>Registrazione</h1>
+				<h1>{lang['registration']}</h1>
 				<div class="alert alert-global"></div>
-				<input type="text" name="name" class="form-control input" placeholder="Nome" /><br />
-				<input type="text" name="surname" class="form-control input" placeholder="Cognome" /><br />
-				<input type="text" name="city" class="form-control input" placeholder="Città" />
+				<input type="text" name="name" class="form-control input" placeholder="{lang['name']}" /><br />
+				<input type="text" name="surname" class="form-control input" placeholder="{lang['surname']}" /><br />
+				<input type="text" name="city" class="form-control input" placeholder="{lang['city']}" />
 				<hr />
-				<input type="text" name="username" class="form-control input" placeholder="Username" /><br />
-				<input type="password" name="password" class="form-control input" placeholder="Password" /><br />
-				<input type="password" name="verifypassword" class="form-control input" placeholder="Ripeti Password" />
+				<input type="text" name="username" class="form-control input" placeholder="{lang['username']}" /><br />
+				<input type="password" name="password" class="form-control input" placeholder="{lang['password']}" /><br />
+				<input type="password" name="verifypassword" class="form-control input" placeholder="{lang['password-repeat']}" />
 				<hr />
-				<input type="text" name="email" class="form-control input" placeholder="Indirizzo Email" /><br />
-				<input type="text" name="phone" class="form-control input" placeholder="Telefono" />
+				<input type="text" name="email" class="form-control input" placeholder="{lang['email-address']}" /><br />
+				<input type="text" name="phone" class="form-control input" placeholder="{lang['phone']}" />
 				<hr />
-				<input type="checkbox" name="privacy" class="checkbox" /> Informativa Privacy<br /><br />
-				<input type="checkbox" name="termsofuse" class="checkbox" /> Termini e Condizioni d'Uso
+				<input type="checkbox" name="privacy" class="checkbox" /> {lang['privacy-policy']}<br /><br />
+				<input type="checkbox" name="termsofuse" class="checkbox" /> {lang['terms-of-use']}
 				<hr />
-				<button class="btn btn-primary btn-block">Registrati</button>
+				<button class="btn btn-primary btn-block">{lang['sign-in']}</button>
 			</div>
 		</div>
 		<script type="text/javascript" src="//code.jquery.com/jquery-latest.js"></script>

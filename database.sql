@@ -37,12 +37,14 @@ CREATE TABLE `av_options` (
 --
 
 INSERT INTO `av_options` (`id`, `option_name`, `option_value`) VALUES
-(1, 'site_name', 'Social Travel Network'),
-(2, 'site_url', 'https://www.amiciviaggiando.it/'),
-(3, 'mail_host', 'mail_host'),
-(4, 'mail_username', 'mail_username'),
-(5, 'mail_port', 'mail_port'),
-(6, 'mail_password', 'mail_password');
+('site_name', 'Social Travel Network'),
+('site_url', 'https://www.amiciviaggiando.it'),
+('site_path', '/homepages/45/d785015712/htdocs/amiciviaggiando.it'),
+('site_language', 'italian');
+('mail_host', 'mail_host'),
+('mail_username', 'mail_username'),
+('mail_port', 'mail_port'),
+('mail_password', 'mail_password');
 
 -- --------------------------------------------------------
 

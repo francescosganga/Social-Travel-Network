@@ -34,7 +34,7 @@
 						<a href="{{url}}/"><img src="{{url}}/assets/images/logo.png" /></a>
 					</div>
 					<div class="col-md-4">
-						<input type="text" name="search" class="form-control input" placeholder="Dove vuoi andare?" />
+						<input type="text" name="search" class="form-control input" placeholder="{lang['where-you-want-to-go']}" />
 					</div>
 					<div class="col-md-4">
 						<a href="{{url}}/profilo/{user['username']}/"><i class="fa fa-user"></i></a>
