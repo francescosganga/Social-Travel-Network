@@ -56,8 +56,10 @@ $AV->templateHeader("{lang['profile-of']} {$userData['username']}", "", Array("p
 				foreach($trips as $trip) {
 					$destination = Array($trip['city'], $trip['country']);
 					$destination = implode(", ", $destination);
+					$trip['slug'] = str_replace(" ", "-", strtolower($trip['title'])) . "-id" . $trip['id'];
 					print "
 				<div class=\"trip col-md-4\">
+					<a href=\"{{url}}/viaggi/{$trip['slug']}/\">
 					<div class=\"background\">
 						<div class=\"overlay\"></div>
 						<img src=\"{{url}}/assets/images/trips/" . strtolower($trip['country']) . ".jpg)\" />
@@ -71,6 +73,7 @@ $AV->templateHeader("{lang['profile-of']} {$userData['username']}", "", Array("p
 							{$destination}
 						</div>
 					</div>
+					</a>
 				</div>";
 				}
 			?>

@@ -6,6 +6,7 @@ RewriteRule ^registrazione/ registration.php
 RewriteRule ^dashboard/ dashboard.php
 RewriteRule ^login/ login.php
 RewriteRule ^logout/ logout.php
+RewriteRule ^viaggi/(.*?)/$ trips.php?param=$1
 
 <IfModule mod_rewrite.c>
 RewriteEngine On

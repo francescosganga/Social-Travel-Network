@@ -144,6 +144,15 @@ class AV {
 
 	}
 
+	public function tripData($trip_id) {
+		$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}trips WHERE id = {$trip_id}") or die($this->MySQLi->error);
+
+		if(!$q->num_rows)
+			return false;
+
+		return $q->fetch_array(MYSQLI_ASSOC);
+	}
+
 	public function currentUser() {
 		$id = $this->userLoggedIn();
 		if($id == false)
