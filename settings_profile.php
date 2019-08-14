@@ -17,7 +17,7 @@ if(isset($_POST['city']) and isset($_POST['privacy'])) {
 
 	$AV->userUpdate($fields);
 
-	$AV->redirect($_SERVER['REQUEST_URI']);
+	//$AV->redirect($_SERVER['REQUEST_URI']);
 }
 $AV->parseHTMLContent();
 $AV->templateHeader("{lang['profile-settings']}", "", Array("settings"));

@@ -129,7 +129,7 @@ class AV {
 	}
 
 	public function uploadImage($image) {
-		$allowed_extensions = array("jpeg","jpg","png");
+		$allowed_extensions = array("jpg");
 		$file_ext = strtolower(end(explode('.', $image['name'])));
 		if(in_array($file_ext, $allowed_extensions) === false)
 			return false;
@@ -137,8 +137,25 @@ class AV {
 			return false;
 
 		$image['name'] = "image-" . time() . ".{$file_ext}";
-		if(move_uploaded_file($image['tmp_name'], "{$this->config['site_path']}/assets/images/uploads/{$image['name']}"))
+		if(move_uploaded_file($image['tmp_name'], "{$this->config['site_path']}/assets/images/uploads/{$image['name']}")) {
+			$filename = "{$this->config['site_path']}/assets/images/uploads/{$image['name']}";
+			
+			include("external/ImageManipulator.php");
+			$im = new ImageManipulator($filename);
+			$centreX = round($im->getWidth() / 2);
+			$centreY = round($im->getHeight() / 2);
+
+			$x1 = $centreX - 150;
+			$y1 = $centreY - 150;
+
+			$x2 = $centreX + 150;
+			$y2 = $centreY + 150;
+
+			$im->crop($x1, $y1, $x2, $y2); // takes care of out of boundary conditions automatically
+			$im->save($filename);
+
 			return "assets/images/uploads/{$image['name']}";
+		}
 		else
 			return false;
 	}

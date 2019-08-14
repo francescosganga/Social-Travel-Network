@@ -31,6 +31,7 @@ Under Construction
 ## Authors
 
 * **Francesco Sganga(http://www.francescosganga.it)** - *Initial work*
+* **philBrown** - *ImageManipulator.php(https://gist.github.com/philBrown/880506)*
 
 ## License
 
