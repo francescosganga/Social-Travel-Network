@@ -16,6 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="{{url}}/assets/css/dashboard.css" />
 		<?php print $custom_css; ?>
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGNXQ1eaemlc6bwlnKozog5ZKV_qvQi9A&libraries=places" async defer></script>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145412630-1"></script>
 		<script>
@@ -34,9 +35,14 @@
 						<a href="{{url}}/"><img src="{{url}}/assets/images/logo.png" /></a>
 					</div>
 					<div class="col-md-4">
-						<input type="text" name="search" class="form-control input" placeholder="{lang['where-you-want-to-go']}" />
+						<form id="searchBox" action="{{url}}/cerca/" method="GET">
+						<input type="hidden" name="country" />
+						<input type="hidden" name="city" />
+						<input type="text" id="gMapsAutocomplete" name="s" class="form-control input" placeholder="{lang['where-you-want-to-go']}" />
+						</form>
 					</div>
 					<div class="col-md-4">
+						<a href="{{url}}/impostazioni/profilo/"><i class="fa fa-cog"></i></a>
 						<a href="{{url}}/profilo/{user['username']}/"><i class="fa fa-user"></i></a>
 					</div>
 				</div>

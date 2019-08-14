@@ -33,8 +33,11 @@ class AV {
 		}
 	}
 
-	public function userData($username) {
-		$q = $this->MySQLi->query("SELECT id, name, surname, city, username, avatar FROM {$this->config['mysql']['table_prefix']}users WHERE username=\"{$username}\"") or die($this->MySQLi->error);
+	public function userData($username_id) {
+		if(is_int($username_id))
+			$q = $this->MySQLi->query("SELECT id, name, surname, city, username, avatar FROM {$this->config['mysql']['table_prefix']}users WHERE id=\"{$username_id}\"") or die($this->MySQLi->error);
+		else
+			$q = $this->MySQLi->query("SELECT id, name, surname, city, username, avatar FROM {$this->config['mysql']['table_prefix']}users WHERE username=\"{$username_id}\"") or die($this->MySQLi->error);
 		if(!$q->num_rows)
 			return false;
 
@@ -150,7 +153,19 @@ class AV {
 		if(!$q->num_rows)
 			return false;
 
-		return $q->fetch_array(MYSQLI_ASSOC);
+		$tripData = $q->fetch_array(MYSQLI_ASSOC);
+		$tripData['partecipants'] = unserialize($tripData['partecipants']);
+		$partecipants = Array();
+
+		foreach($tripData['partecipants'] as $key => $value) {
+			$userData = $this->userData($value);
+			$partecipants[$key] = $userData;
+		}
+
+		$tripData['partecipants'] = $partecipants;
+		$tripData['partecipants']['total'] = count($partecipants);
+
+		return $tripData;
 	}
 
 	public function currentUser() {

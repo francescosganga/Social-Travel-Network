@@ -16,29 +16,40 @@ if($tripData == false)
 	$AV->redirect("/");
 
 $AV->parseHTMLContent();
-$AV->templateHeader("{lang['profile-of']} {$tripData['title']}", $tripData['description'], Array("trips"));
+$AV->templateHeader("{lang['trip']} \"{$tripData['title']}\"", $tripData['description'], Array("trips"));
 ?>
 <div class="trip">
-	<div class="row trip-background" style="background: url({{url}}/assets/images/trips/<?php print strtolower($tripData['country']) ?>.jpg">
-		<div class="col-md-4"></div>
-		<div class="col-md-8">
-			<div class="row">
-				<div class="col-md-12">
-					<h1><?php print $tripData['title']; ?></h1>
-					<h2><?php print $tripData['description']; ?></h2>
+	<div class="header" style="background-image: url({{url}}/assets/images/trips/<?php print strtolower($tripData['country']) ?>.jpg">
+		<div class="overlay"></div>
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-12">
+						<h1><?php print $tripData['title']; ?></h1>
+						<h2><?php print $tripData['description']; ?></h2>
+						<i>
+							<?php if($tripData['partecipants']['total'] == 1): ?>
+							Parteciperà <?php print $tripData['partecipants'][0]['name'] ?> a questo viaggio.
+							<?php else: ?>
+							Parteciperanno <?php print $tripData['partecipants'][0]['name'] ?> e altre <?php print $tripData['partecipants']['total'] ?> persone a questo viaggio.
+							<?php endif; ?>
+						</i>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<h3><?php print $tripData['destination'] ?></h3>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						<h3><?php print $userData['name'] . " " . $userData['surname']; ?></h3>
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h3><?php print $tripData['destination'] ?></h3>
-				</div>
-			</div>
-			<br />
-			<div class="row">
-				<div class="col-md-12">
-					<h3><?php print $userData['name'] . " " . $userData['surname']; ?></h3>
-				</div>
-			</div>
+			<div class="col-md-2"></div>
 		</div>
 	</div>
 </div>

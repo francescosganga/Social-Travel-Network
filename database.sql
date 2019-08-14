@@ -81,7 +81,8 @@ CREATE TABLE `av_trips` (
   `city` varchar(255) DEFAULT NULL,
   `country` varchar(255) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `date` int(15) NOT NULL
+  `date` int(15) NOT NULL,
+  `partecipants` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

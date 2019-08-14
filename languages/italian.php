@@ -30,3 +30,5 @@
 	$lang['mail-verification-subject'] = "Conferma Indirizzo Email";
 	$lang['mail-verification-content'] = "Ciao, {{username}},<br /><br /><a href=\"{{url}}/user.php?verify={{verify_hash}}\">Clicca qui</a> per verifiare il tuo account, oppure copia e incolla il seguente link nella tua barra degli indirizzi:<br /><br />{{url}}/user.php?verify={{verify_hash}}";
 	$lang['trips'] = "Viaggi";
+	$lang['trip'] = "Viaggio";
+	$lang['profile-settings'] = "Impostazioni Profilo";
