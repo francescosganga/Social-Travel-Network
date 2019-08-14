@@ -128,6 +128,34 @@ class AV {
 		return false;
 	}
 
+	public function uploadImage($image) {
+		$allowed_extensions = array("jpeg","jpg","png");
+		$file_ext = strtolower(end(explode('.', $image['name'])));
+		if(in_array($file_ext, $allowed_extensions) === false)
+			return false;
+		if($image['size'] > 2097152)
+			return false;
+
+		$image['name'] = "image-" . time() . ".{$file_ext}";
+		if(move_uploaded_file($image['tmp_name'], "{$this->config['site_path']}/assets/images/uploads/{$image['name']}"))
+			return "assets/images/uploads/{$image['name']}";
+		else
+			return false;
+	}
+
+	public function userUpdate($values) {
+		$query = Array();
+		foreach($values as $key => $value) {
+			$query[] = "{$key} = \"{$value}\"";
+		}
+
+		$query = implode(", ", $query);
+
+		$q = $this->MySQLi->query("UPDATE {$this->config['mysql']['table_prefix']}users SET {$query} WHERE id={$this->currentUser['id']}") or die($this->MySQLi->error);
+
+		return $q;
+	}
+
 	public function userLoggedIn() {
 		if(isset($_SESSION['login_hash']) and $this->checkLoginHash($_SESSION['login_hash']))
 			return $this->checkLoginHash($_SESSION['login_hash']);

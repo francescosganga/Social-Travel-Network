@@ -20,5 +20,8 @@ $(document).ready(function() {
 
 		$("#searchBox").submit();
 	});
-	console.log("Initialized");
+
+	$("select[data-selected]").each(function(i) {
+		$(this).find("option[value='" + $(this).attr("data-selected") + "']").prop("selected", true);
+	})
 });

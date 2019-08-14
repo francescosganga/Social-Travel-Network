@@ -62,6 +62,7 @@ CREATE TABLE `av_users` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `avatar` varchar(255) NOT NULL,
+  `privacy` int(5) DEFAULT 1,
   `last_login` varchar(255) DEFAULT NULL,
   `login_hash` varchar(255) NOT NULL,
   `verified` varchar(255) NOT NULL,

@@ -42,7 +42,7 @@
 						</form>
 					</div>
 					<div class="col-md-4">
-						<a href="{{url}}/impostazioni/profilo/"><i class="fa fa-cog"></i></a>
+						<a href="{{url}}/impostazioni/profilo/"><i class="fa fa-cog"></i></a>&emsp;
 						<a href="{{url}}/profilo/{user['username']}/"><i class="fa fa-user"></i></a>
 					</div>
 				</div>

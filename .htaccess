@@ -2,12 +2,12 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 RewriteRule ^profilo/(.*?)/$ user.php?param=$1
-RewriteRule ^impostazioni/(.*?)/$ settings.php?param=$1
 RewriteRule ^registrazione/ registration.php
 RewriteRule ^dashboard/ dashboard.php
 RewriteRule ^login/ login.php
 RewriteRule ^logout/ logout.php
 RewriteRule ^viaggi/(.*?)/$ trips.php?param=$1
+RewriteRule ^impostazioni/profilo/$ settings_profile.php
 
 <IfModule mod_rewrite.c>
 RewriteEngine On

@@ -32,3 +32,8 @@
 	$lang['trips'] = "Viaggi";
 	$lang['trip'] = "Viaggio";
 	$lang['profile-settings'] = "Impostazioni Profilo";
+	$lang['profile-privacy'] = "Privacy del Profilo";
+	$lang['profile-privacy-descr'] = "Scegli a chi vuoi permettere di visualizzare il tuo profilo.";
+	$lang['friends-only'] = "Solo ai Compagni di Viaggio";
+	$lang['all'] = "Tutti";
+	$lang['save-changes'] = "Salva modifiche";
