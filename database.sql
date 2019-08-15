@@ -40,7 +40,8 @@ INSERT INTO `av_options` (`id`, `option_name`, `option_value`) VALUES
 ('site_name', 'Social Travel Network'),
 ('site_url', 'https://www.amiciviaggiando.it'),
 ('site_path', '/homepages/45/d785015712/htdocs/amiciviaggiando.it'),
-('site_language', 'italian');
+('site_language', 'italian'),
+('google_apikey', 'google_apikey'),
 ('mail_host', 'mail_host'),
 ('mail_username', 'mail_username'),
 ('mail_port', 'mail_port'),

@@ -16,7 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="{{url}}/assets/css/dashboard.css" />
 		<?php print $custom_css; ?>
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGNXQ1eaemlc6bwlnKozog5ZKV_qvQi9A&libraries=places" async defer></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key={{google_apikey}}&libraries=places" async defer></script>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145412630-1"></script>
 		<script>
