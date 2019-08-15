@@ -123,7 +123,11 @@ class AV {
 		$q = $this->MySQLi->query("SELECT id FROM {$this->config['mysql']['table_prefix']}users WHERE login_hash = \"{$loginHash}\"") or die($this->MySQLi->error);
 		if($q->num_rows) {
 			$r = $q->fetch_array(MYSQLI_ASSOC);
-			return $r['id'];
+			//check if id is 1 for maintenance mode
+			if($r['id'] == 1)
+				return $r['id'];
+			else
+				return false;
 		}
 
 		return false;

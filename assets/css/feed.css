@@ -1,0 +1,11 @@
+.feed {
+	width: 60%;
+	margin: auto;
+	margin-top: 70px;
+}
+
+@media screen and (max-width: 600px) {
+	.feed {
+		width: 80%;
+	}
+}

@@ -1,8 +1,16 @@
 $(document).ready(function() {
+	$("#datePicker").each(function(i) {
+		$(this).datepicker({
+			dateFormat: 'dd-mm-yy'
+		});
+	});
+
 	var options = {
 		types: ['(regions)']
 	};
 
+	var dashboardfrom = new google.maps.places.Autocomplete($("#gMapsAutocompleteFrom")[0], options);
+	var dashboardto = new google.maps.places.Autocomplete($("#gMapsAutocompleteTo")[0], options);
 	var autocomplete = new google.maps.places.Autocomplete($("#gMapsAutocomplete")[0], options);
 	google.maps.event.addListener(autocomplete, 'place_changed', function() {
 		var place = autocomplete.getPlace();

@@ -37,3 +37,10 @@
 	$lang['friends-only'] = "Solo ai Compagni di Viaggio";
 	$lang['all'] = "Tutti";
 	$lang['save-changes'] = "Salva modifiche";
+	$lang['insert-a-trip'] = "Inserisci un viaggio";
+	$lang['insert-trip'] = "Inserisci viaggio";
+	$lang['title'] = "Titolo";
+	$lang['description'] = "Descrizione";
+	$lang['from'] = "Partenza";
+	$lang['to'] = "Arrivo";
+	$lang['when'] = "Quando";
