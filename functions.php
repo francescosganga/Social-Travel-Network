@@ -33,6 +33,20 @@ class AV {
 		}
 	}
 
+	public function queryTrips($city, $country) {
+		$trips = Array();
+
+		if($city == "")
+			$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}trips WHERE country = \"{$country}\"") or die($this->MySQLi->error);
+		else
+			$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}trips WHERE city = \"{$city}\" and country = \"{$country}\"") or die($this->MySQLi->error);
+
+		while($r = $q->fetch_array(MYSQLI_ASSOC))
+			$trips[] = $r;
+
+		return $trips;
+	}
+
 	public function userData($username_id) {
 		if(is_int($username_id))
 			$q = $this->MySQLi->query("SELECT id, name, surname, city, username, avatar FROM {$this->config['mysql']['table_prefix']}users WHERE id=\"{$username_id}\"") or die($this->MySQLi->error);

@@ -9,56 +9,40 @@ if(isset($_REQUEST['verify']) and strlen($_REQUEST['verify']) == 32) {
 	$AV->redirect("/");
 }
 
+if(!isset($_GET['country']) or !isset($_GET['city']))
+	$AV->redirect("/");
+
+$country = $AV->escapeString($_GET['country']);
+$city = $AV->escapeString($_GET['city']);
+
+if($city == "")
+	$destination = $country;
+else
+	$destination = "{$city}, {$country}";
+
 if(isset($_REQUEST['param']) and $userData == false)
 	$AV->redirect("/");
 
 $AV->parseHTMLContent();
-$AV->templateHeader("{lang['profile-of']} {$userData['username']}", "", Array("profile"));
+$AV->templateHeader("{lang['searching-trips-to']} {$destination}", "", Array("search", "feed", "profile"));
 ?>
-<div class="profile">
+<div class="search profile">
 	<div class="row">
-		<div class="col-md-4 avatar">
-			<img src="{{url}}/<?php print $userData['avatar']; ?>" />
-		</div>
-		<div class="col-md-8">
-			<div class="row">
-				<div class="col-md-12">
-					<h1><?php print $userData['username']; ?></h1>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<strong>0</strong> {lang['trips']}
-				</div>
-				<div class="col-md-4">
-					<strong>0</strong> {lang['follower']}
-				</div>
-				<div class="col-md-4">
-					<strong>0</strong> {lang['following']}
-				</div>
-			</div>
-			<br />
-			<div class="row">
-				<div class="col-md-12">
-					<h3><?php print $userData['name'] . " " . $userData['surname']; ?></h3>
-				</div>
-			</div>
+		<div class="col-md-12">
+			<h1>{lang['trips-to']} <?php print $destination ?></h1>
 		</div>
 	</div>
 	<div class="row feed">
 		<div class="col-md-12">
 			<div class="row trips">
-				<div class="col-md-12">
-					<h2>{lang['trips']}</h2>
-				</div>
 			<?php
-				$trips = $AV->getTrips($userData['id']);
+				$trips = $AV->queryTrips($city, $country);
 				foreach($trips as $trip) {
 					$destination = Array($trip['city'], $trip['country']);
 					$destination = implode(", ", $destination);
 					$trip['slug'] = str_replace(" ", "-", strtolower($trip['title'])) . "-id" . $trip['id'];
 					print "
-				<div class=\"trip col-md-4\">
+				<div class=\"trip col-md\">
 					<a href=\"{{url}}/viaggi/{$trip['slug']}/\">
 					<div class=\"background\">
 						<div class=\"overlay\"></div>

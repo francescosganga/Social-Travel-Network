@@ -44,3 +44,5 @@
 	$lang['from'] = "Partenza";
 	$lang['to'] = "Arrivo";
 	$lang['when'] = "Quando";
+	$lang['searching-trips-to'] = "Cercando viaggi per";
+	$lang['trips-to'] = "Viaggi per";
