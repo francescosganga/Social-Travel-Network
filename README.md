@@ -15,6 +15,7 @@ You need to have:
 ### Installing
 
 - Dump database.sql to a new db
+- Update table av_options as you want
 - Update config.inc.php with mysql data
 - First registered user is/will be superuser (at this time only userId 1 can access to the platform)
 
