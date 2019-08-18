@@ -59,7 +59,7 @@ $userData = $AV->currentUser;
 			<h3>{lang['profile-privacy']}</h3>
 			<p style="font-style: italic">{lang['profile-privacy-descr']}</p>
 			<select type="text" name="privacy" class="form-control select" data-selected="<?php print $userData['privacy'] ?>">
-				<option value="1">{lang['friends-only']}</option>
+				<option value="1">{lang['registered-users-only']}</option>
 				<option value="2">{lang['all']}</option>
 			</select>
 		</div>

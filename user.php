@@ -3,6 +3,7 @@ include("functions.php");
 $AV = new AV;
 
 $userData = $AV->userData($AV->escapeString($_REQUEST['param']));
+
 if(isset($_REQUEST['verify']) and strlen($_REQUEST['verify']) == 32) {
 	$verifyHash = $AV->escapeString($_REQUEST['verify']);
 	$AV->verifyUser($verifyHash);
@@ -14,6 +15,7 @@ if(isset($_REQUEST['param']) and $userData == false)
 
 $AV->parseHTMLContent();
 $AV->templateHeader("{lang['profile-of']} {$userData['username']}", "", Array("profile"));
+if($userData['privacy'] == 2 or $userData['id'] == $AV->currentUser['id']) {
 ?>
 <div class="profile">
 	<div class="row">
@@ -48,11 +50,13 @@ $AV->templateHeader("{lang['profile-of']} {$userData['username']}", "", Array("p
 	<div class="row feed">
 		<div class="col-md-12">
 			<div class="row trips">
+				<?php
+				$trips = $AV->getTrips($userData['id']);
+				if($trips != false): ?>
 				<div class="col-md-12">
 					<h2>{lang['trips']}</h2>
 				</div>
-			<?php
-				$trips = $AV->getTrips($userData['id']);
+				<?php
 				foreach($trips as $trip) {
 					$destination = Array($trip['city'], $trip['country']);
 					$destination = implode(", ", $destination);
@@ -76,11 +80,53 @@ $AV->templateHeader("{lang['profile-of']} {$userData['username']}", "", Array("p
 					</a>
 				</div>";
 				}
-			?>
+				endif; ?>
 			</div>
 		</div>
 	</div>
 </div>
 <?php
+} elseif($userData['privacy'] == 1) {
+?>
+<div class="profile">
+	<div class="row">
+		<div class="col-md-4 avatar">
+			<img src="{{url}}/assets/images/no-avatar.png" />
+		</div>
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-12">
+					<h1><?php print $userData['username']; ?></h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<strong>0</strong> {lang['trips']}
+				</div>
+				<div class="col-md-4">
+					<strong>0</strong> {lang['follower']}
+				</div>
+				<div class="col-md-4">
+					<strong>0</strong> {lang['following']}
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-md-12">
+					<h3><?php print $userData['name'] . " " . $userData['surname']; ?></h3>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row feed">
+		<div class="col-md-12">
+			<div class="row trips">
+				<div class="col-md-12">{lang['private-profile']}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php
+}
 $AV->templateFooter();
 ?>

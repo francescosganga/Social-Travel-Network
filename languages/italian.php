@@ -34,7 +34,7 @@
 	$lang['profile-settings'] = "Impostazioni Profilo";
 	$lang['profile-privacy'] = "Privacy del Profilo";
 	$lang['profile-privacy-descr'] = "Scegli a chi vuoi permettere di visualizzare il tuo profilo.";
-	$lang['friends-only'] = "Solo ai Compagni di Viaggio";
+	$lang['registered-users-only'] = "Solo agli utenti registrati";
 	$lang['all'] = "Tutti";
 	$lang['save-changes'] = "Salva modifiche";
 	$lang['insert-a-trip'] = "Inserisci un viaggio";
@@ -56,3 +56,5 @@
 	$lang['comment'] = "Commento";
 	$lang['insert'] = "Inserisci";
 	$lang['only-trips-partecipants-can-comment'] = "Solo i partecipanti al viaggio possono commentare.";
+	$lang['private-profile'] = "Il profilo di questo utente è privato. Registrati per collegarti con lui.";
+	$lang['only-registered-users-can-see-comments'] = "Solo gli utenti registrati possono vedere i commenti.";

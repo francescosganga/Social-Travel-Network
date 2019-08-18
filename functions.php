@@ -50,9 +50,9 @@ class AV {
 
 	public function userData($username_id) {
 		if(is_int($username_id))
-			$q = $this->MySQLi->query("SELECT id, name, surname, city, username, avatar FROM {$this->config['mysql']['table_prefix']}users WHERE id=\"{$username_id}\"") or die($this->MySQLi->error);
+			$q = $this->MySQLi->query("SELECT id, name, surname, city, username, avatar, privacy FROM {$this->config['mysql']['table_prefix']}users WHERE id=\"{$username_id}\"") or die($this->MySQLi->error);
 		else
-			$q = $this->MySQLi->query("SELECT id, name, surname, city, username, avatar FROM {$this->config['mysql']['table_prefix']}users WHERE username=\"{$username_id}\"") or die($this->MySQLi->error);
+			$q = $this->MySQLi->query("SELECT id, name, surname, city, username, avatar, privacy FROM {$this->config['mysql']['table_prefix']}users WHERE username=\"{$username_id}\"") or die($this->MySQLi->error);
 		if(!$q->num_rows)
 			return false;
 

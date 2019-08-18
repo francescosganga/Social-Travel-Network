@@ -21,7 +21,10 @@ if(isset($_POST['partecipate']) and $_POST['partecipate'] == 1) {
 	$AV->redirect($_SERVER['REQUEST_URI']);
 }
 
-$currentUserPartecipateToTrip = $AV->checkUserPartecipateToTrip($AV->currentUser['id'], $tripData['id']);
+if($AV->userLoggedIn())
+	$checkUserPartecipateToTrip = $AV->checkUserPartecipateToTrip($AV->currentUser['id'], $tripData['id']);
+else
+	$checkUserPartecipateToTrip = false;
 
 $AV->parseHTMLContent();
 $AV->templateHeader("{lang['trip']} {$tripData['title']}", $tripData['description'], Array("trips", "comments"));
@@ -58,11 +61,11 @@ $AV->templateHeader("{lang['trip']} {$tripData['title']}", $tripData['descriptio
 				</div>
 			</div>
 			<div class="col-md-2 d-flex align-items-center">
-				<?php if($currentUserPartecipateToTrip): ?>
+				<?php if($checkUserPartecipateToTrip and $AV->userLoggedIn()): ?>
 					<button class="btn btn-secondary btn-block" disabled>
 						<i class="fa fa-check"></i> {lang['partecipating']}
 					</button>
-				<?php else: ?>
+				<?php elseif($AV->userLoggedIn() and !$checkUserPartecipateToTrip): ?>
 				<form action="<?php print $_SERVER['REQUEST_URI'] ?>" method="POST">
 					<input type="hidden" name="partecipate" value="1" />
 					<button class="btn btn-primary btn-block">
@@ -84,29 +87,30 @@ $AV->templateHeader("{lang['trip']} {$tripData['title']}", $tripData['descriptio
 			<h2>{lang['comments']}</h2>
 			<div class="row comments">
 			<?php
-				$tripData['comments'] = $AV->getTripComments($tripData['id']);
-				if($tripData['comments'] != false) {
-					foreach($tripData['comments'] as $comment) {
-						print "
+				if($checkUserPartecipateToTrip) {
+					$tripData['comments'] = $AV->getTripComments($tripData['id']);
+					if($tripData['comments'] != false) {
+						foreach($tripData['comments'] as $comment) {
+							print "
 				<div class=\"col-md-12\">
 					{$comment['comment']}
 					<p>
 						{$comment['time']} {lang['by']} <a href=\"{{url}}/profilo/{$comment['userData']['username']}/\">{$comment['userData']['username']}</a>
 					</p>
 				</div>";
+						}
+					} else {
+						?>
+						{lang['no-comments']}
+						<?php
 					}
-				} else {
 					?>
-					{lang['no-comments']}
-					<?php
-				}
-			?>
 			</div>
 			<div class="row insert-comment">
 				<div class="col-md-12">
 					<h3>{lang['insert-comment']}</h3>
 				</div>
-				<?php if($currentUserPartecipateToTrip): ?>
+				<?php if($checkUserPartecipateToTrip): ?>
 				<div class="col-md-12">
 				<form action="<?php print $_SERVER['REQUEST_URI'] ?>" method="POST">
 					<textarea name="comment" class="form-control textarea" placeholder="{lang['comment']}"></textarea><br />
@@ -119,6 +123,15 @@ $AV->templateHeader("{lang['trip']} {$tripData['title']}", $tripData['descriptio
 				</div>
 				<?php endif; ?>
 			</div>
+					<?php
+				} else {
+					?>
+				<div class="col-md-12">
+					{lang['only-registered-users-can-see-comments']}
+				</div>
+					<?php
+				}
+			?>
 		</div>
 	</div>
 </div>
