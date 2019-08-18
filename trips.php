@@ -24,7 +24,7 @@ if(isset($_POST['partecipate']) and $_POST['partecipate'] == 1) {
 $currentUserPartecipateToTrip = $AV->checkUserPartecipateToTrip($AV->currentUser['id'], $tripData['id']);
 
 $AV->parseHTMLContent();
-$AV->templateHeader("{lang['trip']} \"{$tripData['title']}\"", $tripData['description'], Array("trips", "comments"));
+$AV->templateHeader("{lang['trip']} {$tripData['title']}", $tripData['description'], Array("trips", "comments"));
 ?>
 <div class="trip">
 	<div class="header" style="background-image: url({{url}}/assets/images/trips/<?php print strtolower($tripData['country']) ?>.jpg">
