@@ -82,6 +82,7 @@ class AV {
 			$content = str_replace("{{url}}", $this->config['site_url'], $content);
 			$content = str_replace("{{website_name}}", $this->config['site_name'], $content);
 			$content = str_replace("{{google_apikey}}", $this->config['google_apikey'], $content);
+			$content = str_replace("{{google_gaid}}", $this->config['google_gaid'], $content);
 
 			//language system
 			$content = preg_replace_callback("/\{lang\[\'(.*?)\'\]\}/", function($matches) {

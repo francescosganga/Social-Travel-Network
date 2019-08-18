@@ -19,13 +19,13 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 		<script src="https://maps.googleapis.com/maps/api/js?key={{google_apikey}}&libraries=places" async defer></script>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145412630-1"></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id={{google_gaid}}"></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
 
-			gtag('config', 'UA-145412630-1');
+			gtag('config', '{{google_gaid}}');
 		</script>
 	</head>
 	<body>

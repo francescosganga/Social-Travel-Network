@@ -42,6 +42,7 @@ INSERT INTO `av_options` (`id`, `option_name`, `option_value`) VALUES
 ('site_path', '/homepages/45/d785015712/htdocs/amiciviaggiando.it'),
 ('site_language', 'italian'),
 ('google_apikey', 'google_apikey'),
+('google_gaid', 'google_gaid'),
 ('mail_host', 'mail_host'),
 ('mail_username', 'mail_username'),
 ('mail_port', 'mail_port'),
