@@ -12,8 +12,16 @@ $trip = $trip[1];
 $tripData = $AV->tripData($trip);
 $tripData['destination'] = Array($tripData['city'], $tripData['country']);
 $tripData['destination'] = implode(", ", $destination);
+
 if($tripData == false)
 	$AV->redirect("/");
+
+if(isset($_POST['partecipate']) and $_POST['partecipate'] == 1) {
+	$AV->currentUserPartecipateToTrip($tripData['id']);
+	$AV->redirect($_SERVER['REQUEST_URI']);
+}
+
+$currentUserPartecipateToTrip = $AV->checkUserPartecipateToTrip($AV->currentUser['id'], $tripData['id']);
 
 $AV->parseHTMLContent();
 $AV->templateHeader("{lang['trip']} \"{$tripData['title']}\"", $tripData['description'], Array("trips", "comments"));
@@ -23,16 +31,16 @@ $AV->templateHeader("{lang['trip']} \"{$tripData['title']}\"", $tripData['descri
 		<div class="overlay"></div>
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col-md-6">
 				<div class="row">
 					<div class="col-md-12">
 						<h1><?php print $tripData['title']; ?></h1>
 						<br />
 						<i>
 							<?php if($tripData['partecipants']['total'] == 1): ?>
-							Parteciperà <?php print $tripData['partecipants'][0]['name'] ?> a questo viaggio.
+							Parteciperà <a href="<?php print "{{url}}/profilo/{$tripData['partecipants'][0]['username']}/" ?>"><?php print $tripData['partecipants'][0]['name'] ?></a> a questo viaggio.
 							<?php else: ?>
-							Parteciperanno <?php print $tripData['partecipants'][0]['name'] ?> e altre <?php print $tripData['partecipants']['total'] ?> persone a questo viaggio.
+							Parteciperanno <a href="<?php print "{{url}}/profilo/{$tripData['partecipants'][0]['username']}/" ?>"><?php print $tripData['partecipants'][0]['name'] ?></a> e altre <?php print $tripData['partecipants']['total'] - 1 ?> persone a questo viaggio.
 							<?php endif; ?>
 						</i>
 					</div>
@@ -49,7 +57,20 @@ $AV->templateHeader("{lang['trip']} \"{$tripData['title']}\"", $tripData['descri
 					</div>
 				</div>
 			</div>
-			<div class="col-md-2"></div>
+			<div class="col-md-2 d-flex align-items-center">
+				<?php if($currentUserPartecipateToTrip): ?>
+					<button class="btn btn-secondary btn-block" disabled>
+						<i class="fa fa-check"></i> {lang['partecipating']}
+					</button>
+				<?php else: ?>
+				<form action="<?php print $_SERVER['REQUEST_URI'] ?>" method="POST">
+					<input type="hidden" name="partecipate" value="1" />
+					<button class="btn btn-primary btn-block">
+						<i class="fa fa-plus"></i> {lang['partecipate']}
+					</button>
+				</form>
+				<?php endif; ?>
+			</div>
 		</div>
 	</div>
 	<div class="row trip">
@@ -80,6 +101,24 @@ $AV->templateHeader("{lang['trip']} \"{$tripData['title']}\"", $tripData['descri
 					<?php
 				}
 			?>
+			</div>
+			<div class="row insert-comment">
+				<div class="col-md-12">
+					<h3>{lang['insert-comment']}</h3>
+				</div>
+				<?php if($currentUserPartecipateToTrip): ?>
+				<div class="col-md-12">
+				<form action="<?php print $_SERVER['REQUEST_URI'] ?>" method="POST">
+					<textarea name="comment" class="form-control textarea" placeholder="{lang['comment']}"></textarea><br />
+					<button class="btn btn-primary btn-block">{lang['insert']}</button>
+				</form>
+				</div>
+				<?php else: ?>
+				<div class="col-md-12">
+					{lang['only-trips-partecipants-can-comment']}	
+				</div>
+				<?php endif; ?>
+			</div>
 		</div>
 	</div>
 </div>

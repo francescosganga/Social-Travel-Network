@@ -193,6 +193,19 @@ class AV {
 		return $q;
 	}
 
+	public function tripUpdate($trip_id, $values) {
+		$query = Array();
+		foreach($values as $key => $value) {
+			$query[] = "{$key} = \"{$value}\"";
+		}
+
+		$query = implode(", ", $query);
+
+		$q = $this->MySQLi->query("UPDATE {$this->config['mysql']['table_prefix']}trips SET {$query} WHERE id={$trip_id}") or die($this->MySQLi->error);
+
+		return $q;
+	}
+
 	public function userLoggedIn() {
 		if(isset($_SESSION['login_hash']) and $this->checkLoginHash($_SESSION['login_hash']))
 			return $this->checkLoginHash($_SESSION['login_hash']);
@@ -231,25 +244,47 @@ class AV {
 		return $comments;
 	}
 
-	public function tripData($trip_id) {
-		$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}trips WHERE id = {$trip_id}") or die($this->MySQLi->error);
+	public function tripData($trip_id, $partecipantsUnserialize = true) {
+		$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}trips WHERE id = {$trip_id} LIMIT 1") or die($this->MySQLi->error);
 
 		if(!$q->num_rows)
 			return false;
 
 		$tripData = $q->fetch_array(MYSQLI_ASSOC);
-		$tripData['partecipants'] = unserialize($tripData['partecipants']);
-		$partecipants = Array();
+		
+		if($partecipantsUnserialize == true) {
+			$tripData['partecipants'] = unserialize($tripData['partecipants']);
+			$partecipants = Array();
 
-		foreach($tripData['partecipants'] as $key => $value) {
-			$userData = $this->userData($value);
-			$partecipants[$key] = $userData;
+			foreach($tripData['partecipants'] as $partecipant) {
+				$partecipants[] = $this->userData($partecipant);
+			}
+
+			$tripData['partecipants'] = $partecipants;
+			$tripData['partecipants']['total'] = count($partecipants);
 		}
 
-		$tripData['partecipants'] = $partecipants;
-		$tripData['partecipants']['total'] = count($partecipants);
-
 		return $tripData;
+	}
+
+	public function currentUserPartecipateToTrip($trip_id) {
+		$tripData = $this->tripData($trip_id, false);
+		$tripData['partecipants'] = unserialize($tripData['partecipants']);
+		$tripData['partecipants'][] = (int)$this->currentUser['id'];
+
+		$this->tripUpdate($trip_id, Array('partecipants' => $this->escapeString(serialize($tripData['partecipants']))));
+
+		return true;
+	}
+
+	public function checkUserPartecipateToTrip($user_id, $trip_id) {
+		$tripData = $this->tripData($trip_id);
+		foreach($tripData['partecipants'] as $partecipant) {
+			if($partecipant['id'] == $user_id)
+				return true;
+		}
+
+		return false;
 	}
 
 	public function currentUser() {

@@ -50,3 +50,9 @@
 	$lang['comments'] = "Commenti";
 	$lang['by'] = "da";
 	$lang['no-comments'] = "Non ci sono commenti da mostrare.";
+	$lang['partecipate'] = "Partecipa";
+	$lang['partecipating'] = "Partecipi";
+	$lang['insert-comment'] = "Inserisci un commento";
+	$lang['comment'] = "Commento";
+	$lang['insert'] = "Inserisci";
+	$lang['only-trips-partecipants-can-comment'] = "Solo i partecipanti al viaggio possono commentare.";

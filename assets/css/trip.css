@@ -2,6 +2,10 @@
 	position: relative;
 }
 
+.trip button i.fa {
+	font-size: 14px;
+}
+
 .trip .header {
 	position: relative;
 	top: 0;
