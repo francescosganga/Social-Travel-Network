@@ -34,9 +34,12 @@ $AV->templateHeader("{lang['searching-trips-to']} {$destination}", "", Array("se
 	</div>
 	<div class="row feed">
 		<div class="col-md-12">
-			<div class="row trips">
 			<?php
 				$trips = $AV->queryTrips($city, $country);
+				if($trips != false):
+			?>
+			<div class="row trips">
+				<?php
 				foreach($trips as $trip) {
 					$destination = Array($trip['city'], $trip['country']);
 					$destination = implode(", ", $destination);
@@ -60,7 +63,10 @@ $AV->templateHeader("{lang['searching-trips-to']} {$destination}", "", Array("se
 					</a>
 				</div>";
 				}
+			else:
 			?>
+				{lang['no-trips-to-show']}
+			<?php endif; ?>
 			</div>
 		</div>
 	</div>

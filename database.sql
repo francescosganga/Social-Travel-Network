@@ -46,6 +46,7 @@ INSERT INTO `av_options` (`id`, `option_name`, `option_value`) VALUES
 ('mail_username', 'mail_username'),
 ('mail_port', 'mail_port'),
 ('mail_password', 'mail_password');
+('date_format', 'd-m-Y G:i');
 
 -- --------------------------------------------------------
 
@@ -85,6 +86,19 @@ CREATE TABLE `av_trips` (
   `address` varchar(255) DEFAULT NULL,
   `date` int(15) NOT NULL,
   `partecipants` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Struttura della tabella `av_trips`
+--
+
+CREATE TABLE `av_comments` (
+  `id` int(5) NOT NULL,
+  `trip_id` int(5) NOT NULL,
+  `user_id` int(5) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL,
+  PRIMARY KEY(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

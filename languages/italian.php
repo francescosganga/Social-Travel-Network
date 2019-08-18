@@ -46,3 +46,7 @@
 	$lang['when'] = "Quando";
 	$lang['searching-trips-to'] = "Cercando viaggi per";
 	$lang['trips-to'] = "Viaggi per";
+	$lang['no-trips-to-show'] = "Nessun viaggio da mostrare.";
+	$lang['comments'] = "Commenti";
+	$lang['by'] = "da";
+	$lang['no-comments'] = "Non ci sono commenti da mostrare.";

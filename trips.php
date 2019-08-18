@@ -16,7 +16,7 @@ if($tripData == false)
 	$AV->redirect("/");
 
 $AV->parseHTMLContent();
-$AV->templateHeader("{lang['trip']} \"{$tripData['title']}\"", $tripData['description'], Array("trips"));
+$AV->templateHeader("{lang['trip']} \"{$tripData['title']}\"", $tripData['description'], Array("trips", "comments"));
 ?>
 <div class="trip">
 	<div class="header" style="background-image: url({{url}}/assets/images/trips/<?php print strtolower($tripData['country']) ?>.jpg">
@@ -27,7 +27,7 @@ $AV->templateHeader("{lang['trip']} \"{$tripData['title']}\"", $tripData['descri
 				<div class="row">
 					<div class="col-md-12">
 						<h1><?php print $tripData['title']; ?></h1>
-						<h2><?php print $tripData['description']; ?></h2>
+						<br />
 						<i>
 							<?php if($tripData['partecipants']['total'] == 1): ?>
 							Parteciperà <?php print $tripData['partecipants'][0]['name'] ?> a questo viaggio.
@@ -50,6 +50,36 @@ $AV->templateHeader("{lang['trip']} \"{$tripData['title']}\"", $tripData['descri
 				</div>
 			</div>
 			<div class="col-md-2"></div>
+		</div>
+	</div>
+	<div class="row trip">
+		<div class="col-md-4">
+			<h2>{lang['description']}</h2>
+			<p style="text-align: justify">
+				<?php print $tripData['description']; ?>
+			</p>
+		</div>
+		<div class="col-md-8">
+			<h2>{lang['comments']}</h2>
+			<div class="row comments">
+			<?php
+				$tripData['comments'] = $AV->getTripComments($tripData['id']);
+				if($tripData['comments'] != false) {
+					foreach($tripData['comments'] as $comment) {
+						print "
+				<div class=\"col-md-12\">
+					{$comment['comment']}
+					<p>
+						{$comment['time']} {lang['by']} <a href=\"{{url}}/profilo/{$comment['userData']['username']}/\">{$comment['userData']['username']}</a>
+					</p>
+				</div>";
+					}
+				} else {
+					?>
+					{lang['no-comments']}
+					<?php
+				}
+			?>
 		</div>
 	</div>
 </div>

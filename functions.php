@@ -1,4 +1,5 @@
 <?php
+@ini_set("display_errors", 1);
 session_start();
 
 class AV {
@@ -209,6 +210,25 @@ class AV {
 
 		return $trips;
 
+	}
+
+	public function getTripComments($trip_id) {
+		$comments = Array();
+
+		$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}comments WHERE trip_id = {$trip_id}") or die($this->MySQLi->error);
+
+		if($q->num_rows) {
+			while($r = $q->fetch_array(MYSQLI_ASSOC)) {
+				$comment = $r;
+				$comment['time'] = date($this->config['date_format'], $comment['time']);
+				$comment['userData'] = $this->userData((int)$comment['user_id']);
+				$comments[] = $comment;
+			}
+		} else {
+			return false;
+		}
+
+		return $comments;
 	}
 
 	public function tripData($trip_id) {
