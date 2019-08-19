@@ -66,7 +66,7 @@ if($userData['privacy'] == 2 or $userData['id'] == $AV->currentUser['id']) {
 					<a href=\"{{url}}/viaggi/{$trip['slug']}/\">
 					<div class=\"background\">
 						<div class=\"overlay\"></div>
-						<img src=\"{{url}}/assets/images/trips/" . strtolower($trip['country']) . ".jpg)\" />
+						<img src=\"" . $AV->getTripImage($trip['city'], $trip['country']) . ")\" />
 					</div>
 					<div class=\"info\">
 						<div class=\"title\">

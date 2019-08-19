@@ -131,8 +131,23 @@ class AV {
 		}
 	}
 
-	public function redirect($path) {
-		header("Location: " . $this->config['site_url'] . $path);
+	public function getTripImage($city, $country) {
+		$city = strtolower($city);
+		$country = strtolower($country);
+
+		if(file_exists("{$this->config['site_path']}/assets/images/trips/{$city}.jpg"))
+			return "{$this->config['site_url']}/assets/images/trips/{$city}.jpg";
+		elseif(file_exists("{$this->config['site_path']}/assets/images/trips/{$country}.jpg"))
+			return "{$this->config['site_url']}/assets/images/trips/{$country}.jpg";
+		else
+			return "{$this->config['site_url']}/assets/images/placeholder.jpg";
+	}
+
+	public function redirect($path = null) {
+		if($path == null)
+			header("Location: " . $_SERVER['REQUEST_URI']);
+		else
+			header("Location: " . $this->config['site_url'] . $path);
 	}
 
 	public function checkLoginHash($loginHash) {
@@ -226,15 +241,34 @@ class AV {
 
 	}
 
+	public function badWordsFilter($content) {
+		return $content;
+	}
+
+	public function currentUserInsertTrip($title, $description, $from_city, $to, $when) {
+		if(empty($title) or empty($description) or empty($from_city) or empty($to) or empty($when))
+			return false;
+
+		$user_id = $this->currentUser['id'];
+		$title = $this->badWordsFilter($title);
+		$description = $this->badWordsFilter($description);
+		$when = DateTime::createFromFormat($this->config['date_format'], $when);
+		$date = $when->getTimestamp();
+		$partecipants = $this->escapeString(serialize(Array($user_id)));
+		$q = $this->MySQLi->query("INSERT INTO {$this->config['mysql']['table_prefix']}trips (user_id, title, description, from_city, city, country, date, partecipants) VALUES ({$user_id}, \"{$title}\", \"{$description}\", \"{$from_city}\", \"{$to['city']}\", \"{$to['country']}\", \"{$date}\", \"{$partecipants}\")") or die($this->MySQLi->error);
+
+		return $q;
+	}
+
 	public function getTripComments($trip_id) {
 		$comments = Array();
 
-		$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}comments WHERE trip_id = {$trip_id}") or die($this->MySQLi->error);
+		$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}comments WHERE trip_id = {$trip_id} ORDER BY time DESC") or die($this->MySQLi->error);
 
 		if($q->num_rows) {
 			while($r = $q->fetch_array(MYSQLI_ASSOC)) {
 				$comment = $r;
-				$comment['time'] = date($this->config['date_format'], $comment['time']);
+				$comment['time'] = date("{$this->config['date_format']} {$this->config['time_format']}", $comment['time']);
 				$comment['userData'] = $this->userData((int)$comment['user_id']);
 				$comments[] = $comment;
 			}
@@ -258,7 +292,7 @@ class AV {
 			$partecipants = Array();
 
 			foreach($tripData['partecipants'] as $partecipant) {
-				$partecipants[] = $this->userData($partecipant);
+				$partecipants[] = $this->userData((int)$partecipant);
 			}
 
 			$tripData['partecipants'] = $partecipants;
@@ -266,6 +300,13 @@ class AV {
 		}
 
 		return $tripData;
+	}
+
+	public function currentUserCommentTrip($trip_id, $comment) {
+		$time = time();
+		$q = $this->MySQLi->query("INSERT INTO {$this->config['mysql']['table_prefix']}comments (trip_id, user_id, comment, time) VALUES ({$trip_id}, {$this->currentUser['id']}, \"{$comment}\", \"{$time}\")") or die($this->MySQLi->error);
+
+		return true;
 	}
 
 	public function currentUserPartecipateToTrip($trip_id) {
@@ -278,10 +319,21 @@ class AV {
 		return true;
 	}
 
+	public function currentUserUnpartecipateToTrip($trip_id) {
+		$tripData = $this->tripData($trip_id, false);
+		$tripData['partecipants'] = unserialize($tripData['partecipants']);
+		if (($key = array_search($this->currentUser['id'], $tripData['partecipants'])) !== false)
+			unset($tripData['partecipants'][$key]);
+
+		$this->tripUpdate($trip_id, Array('partecipants' => $this->escapeString(serialize($tripData['partecipants']))));
+
+		return true;
+	}
+
 	public function checkUserPartecipateToTrip($user_id, $trip_id) {
 		$tripData = $this->tripData($trip_id);
 		foreach($tripData['partecipants'] as $partecipant) {
-			if($partecipant['id'] == $user_id)
+			if($partecipant['id'] == (int)$user_id)
 				return true;
 		}
 

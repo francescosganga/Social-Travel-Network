@@ -50,8 +50,8 @@
 	$lang['comments'] = "Commenti";
 	$lang['by'] = "da";
 	$lang['no-comments'] = "Non ci sono commenti da mostrare.";
+	$lang['unpartecipate'] = "Non partecipare";
 	$lang['partecipate'] = "Partecipa";
-	$lang['partecipating'] = "Partecipi";
 	$lang['insert-comment'] = "Inserisci un commento";
 	$lang['comment'] = "Commento";
 	$lang['insert'] = "Inserisci";

@@ -33,7 +33,11 @@
 			<header>
 				<div class="row">
 					<div class="col-md-4">
+						<?php if($this->userLoggedIn()): ?>
+						<a href="{{url}}/dashboard/"><img src="{{url}}/assets/images/logo.png" /></a>
+						<?php else: ?>
 						<a href="{{url}}/"><img src="{{url}}/assets/images/logo.png" /></a>
+						<?php endif; ?>
 					</div>
 					<div class="col-md-4">
 						<form id="searchBox" action="{{url}}/cerca/" method="GET">

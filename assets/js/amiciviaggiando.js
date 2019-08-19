@@ -12,6 +12,7 @@ $(document).ready(function() {
 	var dashboardfrom = new google.maps.places.Autocomplete($("#gMapsAutocompleteFrom")[0], options);
 	var dashboardto = new google.maps.places.Autocomplete($("#gMapsAutocompleteTo")[0], options);
 	var autocomplete = new google.maps.places.Autocomplete($("#gMapsAutocomplete")[0], options);
+
 	google.maps.event.addListener(autocomplete, 'place_changed', function() {
 		var place = autocomplete.getPlace();
 
@@ -27,6 +28,21 @@ $(document).ready(function() {
 		});
 
 		$("#searchBox").submit();
+	});
+
+	google.maps.event.addListener(dashboardto, 'place_changed', function() {
+		var place = dashboardto.getPlace();
+
+		$("#insertTrip input[name='city']").val("");
+		$("#insertTrip input[name='country']").val("");
+
+		$.each(place.address_components, function(key, value) {
+			if(value.types.includes("locality"))
+				$("#insertTrip input[name='city']").val(value.long_name);
+
+			if(value.types.includes("country"))
+				$("#insertTrip input[name='country']").val(value.long_name);
+		});
 	});
 
 	$("select[data-selected]").each(function(i) {

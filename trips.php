@@ -21,6 +21,17 @@ if(isset($_POST['partecipate']) and $_POST['partecipate'] == 1) {
 	$AV->redirect($_SERVER['REQUEST_URI']);
 }
 
+if(isset($_POST['unpartecipate']) and $_POST['unpartecipate'] == 1) {
+	$AV->currentUserUnpartecipateToTrip($tripData['id']);
+	$AV->redirect($_SERVER['REQUEST_URI']);
+}
+
+if(isset($_POST['comment'])) {
+	$comment = $AV->escapeString($_POST['comment']);
+	$AV->currentUserCommentTrip($tripData['id'], $comment);
+	$AV->redirect($_SERVER['REQUEST_URI']);	
+}
+
 if($AV->userLoggedIn())
 	$checkUserPartecipateToTrip = $AV->checkUserPartecipateToTrip($AV->currentUser['id'], $tripData['id']);
 else
@@ -30,7 +41,7 @@ $AV->parseHTMLContent();
 $AV->templateHeader("{lang['trip']} {$tripData['title']}", $tripData['description'], Array("trips", "comments"));
 ?>
 <div class="trip">
-	<div class="header" style="background-image: url({{url}}/assets/images/trips/<?php print strtolower($tripData['country']) ?>.jpg">
+	<div class="header" style="background-image: url(<?php print $AV->getTripImage($tripData['city'], $tripData['country']); ?>)">
 		<div class="overlay"></div>
 		<div class="row">
 			<div class="col-md-2"></div>
@@ -62,9 +73,12 @@ $AV->templateHeader("{lang['trip']} {$tripData['title']}", $tripData['descriptio
 			</div>
 			<div class="col-md-2 d-flex align-items-center">
 				<?php if($checkUserPartecipateToTrip and $AV->userLoggedIn()): ?>
-					<button class="btn btn-secondary btn-block" disabled>
-						<i class="fa fa-check"></i> {lang['partecipating']}
+				<form action="<?php print $_SERVER['REQUEST_URI'] ?>" method="POST">
+					<input type="hidden" name="unpartecipate" value="1" />
+					<button class="btn btn-danger btn-block">
+						<i class="fa fa-times"></i> {lang['unpartecipate']}
 					</button>
+				</form>
 				<?php elseif($AV->userLoggedIn() and !$checkUserPartecipateToTrip): ?>
 				<form action="<?php print $_SERVER['REQUEST_URI'] ?>" method="POST">
 					<input type="hidden" name="partecipate" value="1" />
