@@ -234,8 +234,10 @@ class AV {
 
 		$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}trips WHERE user_id = {$user_id}") or die($this->MySQLi->error);
 
-		while($r = $q->fetch_array(MYSQLI_ASSOC))
+		while($r = $q->fetch_array(MYSQLI_ASSOC)) {
+			$r['slug'] = str_replace(" ", "-", strtolower($r['title'])) . "-id" . $r['id'];
 			$trips[] = $r;
+		}
 
 		return $trips;
 
@@ -383,5 +385,34 @@ class AV {
 
 	public function escapeString($string) {
 		return $this->MySQLi->real_escape_string($string);
+	}
+
+	public function updateSitemap() {
+		include("external/SitemapGenerator.php");
+		$generator = new \Icamys\SitemapGenerator\SitemapGenerator($this->config['site_url']);
+
+		$generator->createGZipFile = false;
+		$generator->maxURLsPerSitemap = 50000;
+		$generator->sitemapFileName = "sitemap.xml";
+
+		//already known urls
+		$generator->addUrl("/", new DateTime(), 'always', '0.5');
+		$generator->addUrl("/dashboard/", new DateTime(), 'always', '0.5');
+		$generator->addUrl("/registrazione/", new DateTime(), 'always', '0.5');
+
+		//add profile urls
+		$q = $this->MySQLi->query("SELECT username FROM {$this->config['mysql']['table_prefix']}users") or die($this->MySQLi->error);
+		while($r = $q->fetch_array(MYSQLI_ASSOC))
+			$generator->addUrl("/profilo/{$r['username']}/", new DateTime(), 'always', '0.5');
+
+		//add trip urls
+		$q = $this->MySQLi->query("SELECT id, title FROM {$this->config['mysql']['table_prefix']}trips") or die($this->MySQLi->error);
+		while($r = $q->fetch_array(MYSQLI_ASSOC)) {
+			$trip_slug = str_replace(" ", "-", strtolower($r['title'])) . "-id" . $r['id'];
+			$generator->addUrl("/viaggi/{$trip_slug}/", new DateTime(), 'always', '0.5');
+		}
+
+		$generator->createSitemap();
+		$generator->writeSitemap();
 	}
 }

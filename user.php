@@ -3,7 +3,6 @@ include("functions.php");
 $AV = new AV;
 
 $userData = $AV->userData($AV->escapeString($_REQUEST['param']));
-
 if(isset($_REQUEST['verify']) and strlen($_REQUEST['verify']) == 32) {
 	$verifyHash = $AV->escapeString($_REQUEST['verify']);
 	$AV->verifyUser($verifyHash);
@@ -60,7 +59,6 @@ if($userData['privacy'] == 2 or $userData['id'] == $AV->currentUser['id']) {
 				foreach($trips as $trip) {
 					$destination = Array($trip['city'], $trip['country']);
 					$destination = implode(", ", $destination);
-					$trip['slug'] = str_replace(" ", "-", strtolower($trip['title'])) . "-id" . $trip['id'];
 					print "
 				<div class=\"trip col-md-4\">
 					<a href=\"{{url}}/viaggi/{$trip['slug']}/\">
