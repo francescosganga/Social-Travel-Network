@@ -27,10 +27,11 @@ You need to have:
 * jQuery
 * PHP
 
-## Authors
+## Thanks To
 
 * **[Francesco Sganga](http://www.francescosganga.it)** - *Initial work*
 * **philBrown** - *[ImageManipulator.php](https://gist.github.com/philBrown/880506)*
+* **icamys** - *[SitemapGenerator.php](https://github.com/icamys/php-sitemap-generator)*
 
 ## License
 
