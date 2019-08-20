@@ -23,9 +23,9 @@ if(isset($_POST['title'])
 	$AV->redirect();
 }
 $AV->parseHTMLContent();
-$AV->templateHeader("{lang['welcome-back']} {user['name']} {lang['on']} {{website_name}}", "", Array("feed"));
+$AV->templateHeader("{lang['welcome-back']} {user['name']} {lang['on']} {{website_name}}", "", Array("profile"));
 ?>
-<div class="feed">
+<div class="profile">
 	<div class="row">
 		<div class="col-md-12">
 			<form id="insertTrip" action="<?php print $_SERVER['REQUEST_URI'] ?>" method="POST">
@@ -49,7 +49,44 @@ $AV->templateHeader("{lang['welcome-back']} {user['name']} {lang['on']} {{websit
 				<div class="col-md-6">
 					<button class="btn btn-primary btn-block">{lang['insert-trip']}</button><br />
 				</div>
+			</div>
 			</form>
+		</div>
+	</div>
+	<div class="row feed">
+		<div class="col-md-12">
+			<div class="row trips">
+				<?php
+				$trips = $AV->getTrips();
+				if($trips != false): ?>
+				<div class="col-md-12">
+					<h2>{lang['trips']}</h2>
+				</div>
+				<?php
+				foreach($trips as $trip) {
+					$destination = Array($trip['city'], $trip['country']);
+					$destination = implode(", ", $destination);
+					print "
+				<div class=\"trip col-md-4\">
+					<a href=\"{{url}}/viaggi/{$trip['slug']}/\">
+					<div class=\"background\">
+						<div class=\"overlay\"></div>
+						<img src=\"" . $AV->getTripImage($trip['city'], $trip['country']) . ")\" />
+					</div>
+					<div class=\"info\">
+						<div class=\"title\">
+							{$trip['title']}
+						</div>
+						<br />
+						<div class=\"destination\">
+							{$destination}
+						</div>
+					</div>
+					</a>
+				</div>";
+				}
+				endif; ?>
+			</div>
 		</div>
 	</div>
 </div>

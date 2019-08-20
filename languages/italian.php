@@ -58,3 +58,4 @@
 	$lang['only-trips-partecipants-can-comment'] = "Solo i partecipanti al viaggio possono commentare.";
 	$lang['private-profile'] = "Il profilo di questo utente è privato. Registrati per collegarti con lui.";
 	$lang['only-registered-users-can-see-comments'] = "Solo gli utenti registrati possono vedere i commenti.";
+	$lang['trips-user-partecipating'] = "Viaggi a cui partecipa l'utente";

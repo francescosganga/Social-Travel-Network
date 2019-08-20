@@ -229,14 +229,19 @@ class AV {
 		return false;
 	}
 
-	public function getTrips($user_id) {
+	public function getTrips($user_id = NULL, $LIMIT = "0, 10") {
 		$trips = Array();
-
-		$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}trips WHERE user_id = {$user_id}") or die($this->MySQLi->error);
+		$q = $this->MySQLi->query("SELECT * FROM {$this->config['mysql']['table_prefix']}trips ORDER BY id DESC LIMIT {$LIMIT}") or die($this->MySQLi->error);
 
 		while($r = $q->fetch_array(MYSQLI_ASSOC)) {
 			$r['slug'] = str_replace(" ", "-", strtolower($r['title'])) . "-id" . $r['id'];
-			$trips[] = $r;
+			if($user_id == NULL) {
+				$trips[] = $r;
+			} else {
+				$r['partecipants'] = unserialize($r['partecipants']);
+				if(array_search((int)$user_id, $r['partecipants']) !== false)
+					$trips[] = $r;
+			}
 		}
 
 		return $trips;
@@ -324,7 +329,7 @@ class AV {
 	public function currentUserUnpartecipateToTrip($trip_id) {
 		$tripData = $this->tripData($trip_id, false);
 		$tripData['partecipants'] = unserialize($tripData['partecipants']);
-		if (($key = array_search($this->currentUser['id'], $tripData['partecipants'])) !== false)
+		if(($key = array_search($this->currentUser['id'], $tripData['partecipants'])) !== false)
 			unset($tripData['partecipants'][$key]);
 
 		$this->tripUpdate($trip_id, Array('partecipants' => $this->escapeString(serialize($tripData['partecipants']))));

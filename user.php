@@ -53,7 +53,7 @@ if($userData['privacy'] == 2 or $userData['id'] == $AV->currentUser['id']) {
 				$trips = $AV->getTrips($userData['id']);
 				if($trips != false): ?>
 				<div class="col-md-12">
-					<h2>{lang['trips']}</h2>
+					<h2>{lang['trips-user-partecipating']}</h2>
 				</div>
 				<?php
 				foreach($trips as $trip) {
