@@ -24,3 +24,15 @@
 .dashboard header img {
 	max-width: 150px;
 }
+
+.dashboard_content {
+	width: 80%;
+	margin: auto;
+	margin-top: 70px;
+}
+
+@media screen and (max-width: 600px) {
+	.dashboard_content {
+		width: 95%;
+	}
+}
