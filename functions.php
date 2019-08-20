@@ -155,7 +155,7 @@ class AV {
 		if($q->num_rows) {
 			$r = $q->fetch_array(MYSQLI_ASSOC);
 			//check if id is 1 for maintenance mode
-			if($r['id'] == 1)
+			if($r['id'] == 1 or $r['id'] == 3)
 				return $r['id'];
 			else
 				return false;
