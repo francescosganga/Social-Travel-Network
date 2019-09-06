@@ -1,4 +1,14 @@
+$(document).on({
+    'DOMNodeInserted': function() {
+        $('.pac-item, .pac-item span', this).addClass('needsclick');
+    }
+}, '.pac-container');
+
 $(document).ready(function() {
+	$('#gMapsAutocomplete').keypress(function() { 
+		$(".pac-container").show();
+	});
+
 	$("#datePicker").each(function(i) {
 		$(this).datepicker({
 			dateFormat: 'dd-mm-yy'

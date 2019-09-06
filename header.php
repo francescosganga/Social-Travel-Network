@@ -30,7 +30,7 @@
 	</head>
 	<body>
 		<div class="dashboard">
-			<header>
+			<header class="desktop">
 				<div class="row">
 					<div class="col-md-4">
 						<?php if($this->userLoggedIn()): ?>
@@ -55,6 +55,36 @@
 						<a href="{{url}}/" class="btn btn-secondary">Login</a>&emsp;
 						<a href="{{url}}/registrazione/" class="btn btn-primary">Registrazione</a>
 						<?php endif; ?>
+					</div>
+				</div>
+			</header>
+			<header class="mobile">
+				<div class="row">
+					<div class="col">
+						<?php if($this->userLoggedIn()): ?>
+						<a href="{{url}}/dashboard/"><img src="{{url}}/assets/images/logo.png" /></a>
+						<?php else: ?>
+						<a href="{{url}}/"><img src="{{url}}/assets/images/logo.png" /></a>
+						<?php endif; ?>
+					</div>
+					<div class="col">
+						<?php if($this->userLoggedIn()): ?>
+						<a href="{{url}}/impostazioni/profilo/"><i class="fa fa-cog"></i></a>&emsp;
+						<a href="{{url}}/profilo/{user['username']}/"><i class="fa fa-user"></i></a>&emsp;
+						<a href="{{url}}/logout/"><i class="fa fa-sign-out"></i></a>
+						<?php else: ?>
+						<a href="{{url}}/" class="btn btn-secondary">Login</a>&emsp;
+						<a href="{{url}}/registrazione/" class="btn btn-primary">Registrazione</a>
+						<?php endif; ?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<form id="searchBox" action="{{url}}/cerca/" method="GET">
+						<input type="hidden" name="country" />
+						<input type="hidden" name="city" />
+						<input type="text" id="gMapsAutocomplete" name="s" class="form-control input" placeholder="{lang['where-you-want-to-go']}" />
+						</form>
 					</div>
 				</div>
 			</header>

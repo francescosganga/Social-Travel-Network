@@ -17,6 +17,10 @@
 	font-size: 28px;
 }
 
+.dashboard header.mobile {
+	display: none;
+}
+
 .dashboard header .row > div {
 	text-align: center;
 }
@@ -31,7 +35,18 @@
 	margin-top: 70px;
 }
 
+.pac-container {
+	z-index: 99999999999 !important;
+}
+
 @media screen and (max-width: 600px) {
+	.dashboard header.mobile {
+		display: block;
+	}
+
+	.dashboard header.desktop {
+		display: none;
+	}
 	.dashboard_content {
 		width: 95%;
 	}
