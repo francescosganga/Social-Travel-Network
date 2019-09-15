@@ -1,5 +1,5 @@
 <?php
-@ini_set("display_errors", 1);
+//@ini_set("display_errors", 1);
 session_start();
 
 class AV {
@@ -154,11 +154,7 @@ class AV {
 		$q = $this->MySQLi->query("SELECT id FROM {$this->config['mysql']['table_prefix']}users WHERE login_hash = \"{$loginHash}\"") or die($this->MySQLi->error);
 		if($q->num_rows) {
 			$r = $q->fetch_array(MYSQLI_ASSOC);
-			//check if id is 1 for maintenance mode
-			if($r['id'] == 1 or $r['id'] == 3)
-				return $r['id'];
-			else
-				return false;
+			return $r['id'];
 		}
 
 		return false;
