@@ -38,7 +38,7 @@ $AV->templateHeader("{lang['welcome-back']} {user['name']} {lang['on']} {{websit
 						$trips = $AV->getTrips();
 						if(!$trips):
 							?>
-							{lang['no-trips-available']}
+							{lang['no-trips-to-show']}
 							<?php
 						else:
 							foreach($trips as $trip) {
