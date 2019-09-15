@@ -7,14 +7,18 @@ if(!isset($_REQUEST['param']))
 
 $trip = $AV->escapeString($_REQUEST['param']);
 $trip = explode("-id", $trip);
-$trip = $trip[1];
+$trip = (int)$trip[1];
 
 $tripData = $AV->tripData($trip);
+
+if(!$tripData) {
+	http_response_code(404);
+	print "404 Not Found";
+	die();
+}
+
 $tripData['destination'] = Array($tripData['city'], $tripData['country']);
 $tripData['destination'] = implode(", ", $destination);
-
-if($tripData == false)
-	$AV->redirect("/");
 
 if(isset($_POST['partecipate']) and $_POST['partecipate'] == 1) {
 	$AV->currentUserPartecipateToTrip($tripData['id']);
