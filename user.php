@@ -9,11 +9,8 @@ if(isset($_REQUEST['verify']) and strlen($_REQUEST['verify']) == 32) {
 	$AV->redirect("/");
 }
 
-if(isset($_REQUEST['param']) and $userData == false) {
-	http_response_code(404);
-	print "404 Not Found";
-	die();
-}
+if(isset($_REQUEST['param']) and $userData == false)
+	$AV->pageNotFound();
 
 $AV->parseHTMLContent();
 $AV->templateHeader("{lang['profile-of']} {$userData['username']}", "", Array("profile"));

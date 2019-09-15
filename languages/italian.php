@@ -62,3 +62,5 @@
 	$lang['latest-trips'] = "Ultimi viaggi";
 	$lang['choose-file'] = "Scegli file";
 	$lang['no-trips-available'] = "Nessun viaggio disponibile";
+	$lang['not-found-title'] = "404 Pagina non trovata";
+	$lang['not-found-string'] = "La pagina che stai cercando non esiste o non è più disponibile.";

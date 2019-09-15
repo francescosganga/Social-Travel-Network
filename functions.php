@@ -48,6 +48,23 @@ class AV {
 		return $trips;
 	}
 
+	public function pageNotFound() {
+		http_response_code(404);
+		$this->parseHTMLContent();
+		$this->templateHeader("{lang['not-found-title']}");
+		?>
+		<div class="dashboard_content">
+			<div class="row">
+				<div class="col-md-12">
+					{lang['not-found-string']}
+				</div>
+			</div>
+		</div>
+		<?php
+		$this->templateFooter();
+		die();
+	}
+
 	public function userData($username_id) {
 		if(is_int($username_id))
 			$q = $this->MySQLi->query("SELECT id, name, surname, city, username, avatar, privacy FROM {$this->config['mysql']['table_prefix']}users WHERE id=\"{$username_id}\"") or die($this->MySQLi->error);

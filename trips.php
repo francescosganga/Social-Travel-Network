@@ -11,11 +11,8 @@ $trip = (int)$trip[1];
 
 $tripData = $AV->tripData($trip);
 
-if(!$tripData) {
-	http_response_code(404);
-	print "404 Not Found";
-	die();
-}
+if(!$tripData)
+	$AV->pageNotFound();
 
 $tripData['destination'] = Array($tripData['city'], $tripData['country']);
 $tripData['destination'] = implode(", ", $destination);
