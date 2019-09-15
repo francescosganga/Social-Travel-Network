@@ -16,7 +16,7 @@
 	$lang['password-repeat'] = "Ripeti Password";
 	$lang['email-address'] = "Indirizzo Email";
 	$lang['phone'] = "Telefono";
-	$lang['privaty-policy'] = "Informativa Privacy";
+	$lang['privacy-policy'] = "Informativa Privacy";
 	$lang['terms-of-use'] = "Termini e Condizioni d'Uso";
 	$lang['sign-in'] = "Registrati";
 	$lang['profile-of'] = "Profilo di";
