@@ -1,27 +1,10 @@
-$(document).on({
-    'DOMNodeInserted': function() {
-        $('.pac-item, .pac-item span', this).addClass('needsclick');
-    }
-}, '.pac-container');
-
-$(document).ready(function() {
-	$('#gMapsAutocomplete').keypress(function() { 
-		$(".pac-container").show();
-	});
-
-	$("#datePicker").each(function(i) {
-		$(this).datepicker({
-			dateFormat: 'dd-mm-yy'
-		});
-	});
-
+$("#gMapsAutocomplete, #gMapsAutocompleteMobile").focus(function() {
 	var options = {
 		types: ['(regions)']
 	};
 
-	var dashboardfrom = new google.maps.places.Autocomplete($("#gMapsAutocompleteFrom")[0], options);
-	var dashboardto = new google.maps.places.Autocomplete($("#gMapsAutocompleteTo")[0], options);
-	var autocomplete = new google.maps.places.Autocomplete($("#gMapsAutocomplete")[0], options);
+	var autocomplete = new google.maps.places.Autocomplete(document.getElementById("gMapsAutocomplete"), options);
+	var autocompleteMobile = new google.maps.places.Autocomplete(document.getElementById("gMapsAutocompleteMobile"), options);
 
 	google.maps.event.addListener(autocomplete, 'place_changed', function() {
 		var place = autocomplete.getPlace();
@@ -40,6 +23,31 @@ $(document).ready(function() {
 		$("#searchBox").submit();
 	});
 
+	google.maps.event.addListener(autocompleteMobile, 'place_changed', function() {
+		var place = autocompleteMobile.getPlace();
+
+		$("#searchBox input[name='city']").val("");
+		$("#searchBox input[name='country']").val("");
+
+		$.each(place.address_components, function(key, value) {
+			if(value.types.includes("locality"))
+				$("#searchBox input[name='city']").val(value.long_name);
+
+			if(value.types.includes("country"))
+				$("#searchBox input[name='country']").val(value.long_name);
+		});
+
+		$("#searchBox").submit();
+	});
+});
+
+$("#gMapsAutocompleteTo").focus(function() {
+	var options = {
+		types: ['(regions)']
+	};
+
+	var dashboardto = new google.maps.places.Autocomplete(document.getElementById("gMapsAutocompleteTo"), options);
+
 	google.maps.event.addListener(dashboardto, 'place_changed', function() {
 		var place = dashboardto.getPlace();
 
@@ -52,6 +60,22 @@ $(document).ready(function() {
 
 			if(value.types.includes("country"))
 				$("#insertTrip input[name='country']").val(value.long_name);
+		});
+	});
+});
+
+$("#gMapsAutocompleteFrom").focus(function() {
+	var options = {
+		types: ['(regions)']
+	};
+
+	var dashboardfrom = new google.maps.places.Autocomplete(document.getElementById("gMapsAutocompleteFrom"), options);
+});
+
+$(document).ready(function() {
+	$("#datePicker").each(function(i) {
+		$(this).datepicker({
+			dateFormat: 'dd-mm-yy'
 		});
 	});
 

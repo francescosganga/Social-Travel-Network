@@ -83,7 +83,7 @@
 						<form id="searchBox" action="{{url}}/cerca/" method="GET">
 						<input type="hidden" name="country" />
 						<input type="hidden" name="city" />
-						<input type="text" id="gMapsAutocomplete" name="s" class="form-control input" placeholder="{lang['where-you-want-to-go']}" />
+						<input type="text" id="gMapsAutocompleteMobile" name="s" class="form-control input" placeholder="{lang['where-you-want-to-go']}" />
 						</form>
 					</div>
 				</div>
