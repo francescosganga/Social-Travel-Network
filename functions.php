@@ -122,7 +122,7 @@ class AV {
 
 			if(!$q)
 				return false;
-			elseif(!$this->sendMail($email, $this->language['mail-verificaiton-subject'], $this->language['mail-verification-content']))
+			elseif(!$this->sendMail(Array($email, "{$name} {$surname}"), $this->language['mail-verification-subject'], $this->language['mail-verification-content'])) 
 				return false;
 			else
 				return true;
@@ -381,7 +381,33 @@ class AV {
 	}
 
 	public function sendMail($to, $subject, $message) {
-		return mail($to, $subject, $message);
+		include("external/PHPMailer/PHPMailerAutoload.php");
+
+		$mail = new PHPMailer;
+		$mail->isSMTP();
+		$mail->Host = $this->config['mail_host'];
+		$mail->SMTPAuth = true;
+		$mail->Username = $this->config['mail_username'];
+		$mail->Password = $this->config['mail_password'];
+		
+		if($this->config['mail_port'] == 587)
+			$mail->SMTPSecure = 'tls';
+		elseif($this->config['mail_port'] == 465)
+			$mail->SMTPSecure = 'ssl';
+		
+		$mail->Port = $this->config['mail_port'];
+
+		$mail->setFrom($this->config['mail_username'], $this->config['site_name']);
+		$mail->addAddress($to[0], $to[1]);
+		$mail->isHTML(true);
+
+		$mail->Subject = $subject;
+		$mail->Body    = $message;
+
+		if(!$mail->send())
+		    return false;
+		else
+		    return true;
 	}
 
 	public function escapeString($string) {

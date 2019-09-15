@@ -22,7 +22,7 @@
 	$lang['profile-of'] = "Profilo di";
 	$lang['trips'] = "viaggi";
 	$lang['follower'] = "follower";
-	$lang['following'] = "following";
+	$lang['following'] = "following"; 
 	$lang['welcome-back'] = "Bentornato";
 	$lang['on'] = "su";
 	$lang['maintenance-mode'] = "Piattaforma in manutenzione.";
