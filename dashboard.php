@@ -36,28 +36,34 @@ $AV->templateHeader("{lang['welcome-back']} {user['name']} {lang['on']} {{websit
 					<div class="row trips">
 						<?php
 						$trips = $AV->getTrips();
-						foreach($trips as $trip) {
-							$destination = Array($trip['city'], $trip['country']);
-							$destination = implode(", ", $destination);
-							print "
-						<div class=\"trip col-md-4\">
-							<a href=\"{{url}}/viaggi/{$trip['slug']}/\">
-							<div class=\"background\">
-								<div class=\"overlay\"></div>
-								<img src=\"" . $AV->getTripImage($trip['city'], $trip['country']) . ")\" />
-							</div>
-							<div class=\"info\">
-								<div class=\"title\">
-									{$trip['title']}
+						if(!$trips):
+							?>
+							{lang['no-trips-available']}
+							<?php
+						else:
+							foreach($trips as $trip) {
+								$destination = Array($trip['city'], $trip['country']);
+								$destination = implode(", ", $destination);
+								print "
+							<div class=\"trip col-md-4\">
+								<a href=\"{{url}}/viaggi/{$trip['slug']}/\">
+								<div class=\"background\">
+									<div class=\"overlay\"></div>
+									<img src=\"" . $AV->getTripImage($trip['city'], $trip['country']) . ")\" />
 								</div>
-								<br />
-								<div class=\"destination\">
-									{$destination}
+								<div class=\"info\">
+									<div class=\"title\">
+										{$trip['title']}
+									</div>
+									<br />
+									<div class=\"destination\">
+										{$destination}
+									</div>
 								</div>
-							</div>
-							</a>
-						</div>";
-						}
+								</a>
+							</div>";
+							}
+						endif;
 						?>
 					</div>
 				</div>

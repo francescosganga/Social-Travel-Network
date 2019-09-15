@@ -60,3 +60,5 @@
 	$lang['only-registered-users-can-see-comments'] = "Solo gli utenti registrati possono vedere i commenti.";
 	$lang['trips-user-partecipating'] = "Viaggi a cui partecipa l'utente";
 	$lang['latest-trips'] = "Ultimi viaggi";
+	$lang['choose-file'] = "Scegli file";
+	$lang['no-trips-available'] = "Nessun viaggio disponibile";

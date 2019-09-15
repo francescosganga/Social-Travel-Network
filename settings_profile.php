@@ -49,7 +49,7 @@ $userData = $AV->currentUser;
 					</div>
 					<div class="custom-file">
 						<input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name="avatar" />
-						<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+						<label class="custom-file-label" for="inputGroupFile01">{lang['choose-file']}</label>
 					</div>
 				</div>
 			</div>

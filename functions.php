@@ -177,13 +177,13 @@ class AV {
 			$centreX = round($im->getWidth() / 2);
 			$centreY = round($im->getHeight() / 2);
 
-			$x1 = $centreX - 150;
-			$y1 = $centreY - 150;
+			$x1 = $centreX - 250;
+			$y1 = $centreY - 250;
 
-			$x2 = $centreX + 150;
-			$y2 = $centreY + 150;
+			$x2 = $centreX + 250;
+			$y2 = $centreY + 250; 
 
-			$im->crop($x1, $y1, $x2, $y2); // takes care of out of boundary conditions automatically
+			$im->crop($x1, $y1, $x2, $y2);
 			$im->save($filename);
 
 			return "assets/images/uploads/{$image['name']}";
