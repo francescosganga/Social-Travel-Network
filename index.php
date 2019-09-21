@@ -34,8 +34,9 @@ $AV->parseHTMLContent();
 			<div class="row">
 				<div class="col-md-12">
 					<p style="font-size: 24px; font-weight: bold; text-align: center">
-						AmiciViaggiando.it sarà ufficialmente online dal 1 ottobre 2019.<br />
-						Intanto puoi registrarti e ricevere via mail una sorpresa a te dedicata.
+						Benvenuto su AmiciViaggiando.it.<br />
+						Registrati per organizzare viaggi e trovare dei compagni<br />
+						o per partecipare a viaggi gi&agrave; organizzati.
 					</p>
 				</div>
 				<div class="col-md-6">
