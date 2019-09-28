@@ -139,13 +139,33 @@ class AV {
 
 			if(!$q)
 				return false;
-			elseif(!$this->sendMail(Array($email, "{$name} {$surname}"), $this->language['mail-verification-subject'], $this->language['mail-verification-content'])) 
+			
+			if(!$this->sendMail(Array($email, "{$name} {$surname}"), $this->language['mail-verification-subject'], $this->language['mail-verification-content'])) 
 				return false;
-			else
-				return true;
+			
+			return true;
 		} else {
 			return false;
 		}
+	}
+
+	public function userResendVerificationMail($user_id) {
+		$user_id = $this->escapeString($user_id);
+		$q = $this->MySQLi->query("SELECT name, surname, email, verify_hash FROM {$this->config['mysql']['table_prefix']}users WHERE id={$user_id}") or die($this->MySQLi->error);
+
+		if(!$q->num_rows)
+			return false;
+
+		$r = $q->fetch_array(MYSQLI_ASSOC);
+
+		$this->language['mail-verification-content'] = str_replace("{{url}}", $this->config['site_url'], $this->language['mail-verification-content']);
+		$this->language['mail-verification-content'] = str_replace("{{username}}", $r['username'], $this->language['mail-verification-content']);
+		$this->language['mail-verification-content'] = str_replace("{{verify_hash}}", $r['verify_hash'], $this->language['mail-verification-content']);
+			
+		if(!$this->sendMail(Array($r['email'], "{$r['name']} {$r['surname']}"), $this->language['mail-verification-subject'], $this->language['mail-verification-content'])) 
+			return false;
+
+		return true;
 	}
 
 	public function getTripImage($city, $country) {
