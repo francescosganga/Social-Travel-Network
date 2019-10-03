@@ -5,13 +5,13 @@ $AV->parseHTMLContent();
 ?>
 <html>
 	<head>
-		<title>Trova la giusta compagnia per il tuo viaggio su {{website_name}}</title>
+		<title>Come funziona un Social Travel Network - {{website_name}}</title>
 
-		<meta name="description" content="Il primo Social Travel tutto italiano per viaggiare in compagnia, trova amici e amiche di viaggio! " />
+		<meta name="description" content="Scopri come e perché utilizzare un Social Travel Network come {{website_name}}" />
 		<meta property="og:site_name" content="{{website_name}}" />
 		<meta property="og:site" content="" />
-		<meta property="og:title" content="Trova la giusta compagnia per il tuo viaggio su {{website_name}}" />
-		<meta property="og:description" content="Il primo Social Travel tutto italiano per viaggiare in compagnia, trova amici e amiche di viaggio!" />
+		<meta property="og:title" content="Come funziona un Social Travel Network come {{website_name}}" />
+		<meta property="og:description" content="Scopri come e perché utilizzare un Social Travel Network come {{website_name}}" />
 		<meta property="og:image" content="" />
 		<meta property="og:url" content="" />
 
@@ -109,64 +109,13 @@ $AV->parseHTMLContent();
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Trova subito dei compagni di viaggio</h1>
-					<i>Scopri il <strong>Social Travel</strong>!</i>
-					<p style="text-align: justify">
-						Il Social Travel è un nuovo modo di viaggiare. Consiste nel trovare una persona online per condividere il proprio viaggio. Se anche tu ami conoscere persone nuove, continua la lettura e scopri come funziona <strong>Amici Viaggiando.</strong>.
-					</p>
-					<p style="text-align: justify">
-						Siamo una piattaforma che ti permette di cercare e trovare compagni di viaggio. Puoi iscriverti gratuitamente e puoi inserire un post per ogni viaggio che intendi organizzare. Gli utenti del Social Network ti contatteranno se interessati al tuo viaggio. Ogni utente è commentato dagli altri utenti, attribuendo anche un punteggio da 1 a 5 stelle.
+					<h1>Come trovare compagni di viaggio con un Social Travel Network</h1>
+				</div>
+				<div class="col-md-12">
+					<p>
+						Pagina in costruzione
 					</p>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<h2>Cos'è Amici Viaggiando</h2>
-					<p style="text-align: justify">
-						AmiciViaggiando.it è un Network che mette in contatto le persone che cercano un compagno di viaggio. Registrati gratuitamente, compila il tuo profilo nel modo più completo possibile, e potrai accedere alla piattaforma che ti permetterà di visualizzare i viaggi inseriti dagli altri utenti e richiederne la partecipazione.
-					</p>
-					<p style="text-align: justify">
-						Potrai anche inserire già da subito i viaggi che hai intenzione di fare nei prossimi periodi in modo da iniziare subito a cercare i tuoi <strong>compagni di viaggio</strong>.
-					</p>
-				</div>
-				<div class="col-md-6">
-					<div class="image"><img src="{{url}}/assets/images/social-travel.jpg" /></div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="image"><img src="{{url}}/assets/images/amiche-in-viaggio.jpg" /></div>
-				</div>
-				<div class="col-md-6">
-					<h3>Cosa puoi fare su Amici Viaggiando</h3>
-					<p style="text-align: justify">
-						Una volta iscritti puoi aggiungere un post in cui, inserendo le proprie preferenze, sarai in grado di trovare nuovi compagni di viaggio. Puoi inserire un post standard di viaggio, oppure tramite la funzione "esperto" definire in maniera dettagliata varie opzioni di viaggio, vacanza, appuntamento, viaggio di gruppo o per ospitare. Ogni iscritto ha una propria pagina personale in cui il flusso dei viaggi presenti è dato dai propri post e da tutti i post dei compagni di viaggio o degli amici di cui commentiamo o mettiamo un like.
-					</p>
-					<p style="text-align: justify">
-						Diventa la bacheca di viaggio personale, dove sarà facile verificare se i propri contatti hanno pubblicato un post di viaggio.
-					</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<h3>Viaggi di Gruppo</h3>
-					<p style="text-align: justify">
-						È possibile, tramite la funzione "esperto" dalla pagina di inserimento viaggio, inserire un post per un viaggio di gruppo. Una volta definite le opzioni e il numero massimo di viaggiatori possibili, può essere pubblicato. Ogni iscritto può decidere a quel punto se chiedere di partecipare tramite l'apposito pulsante che verra visualizzato nel flusso dei viaggi.
-					</p>
-					<p style="text-align: justify">
-						Quando decidi con chi viaggiare, puoi scegliere se partire con maschi, femmine, coppie oppure se non hai preferenze particolari, con tutti e tre. In base a questa decisione il tuo post sarà reso visibile dal sistema solamente alle persone che rispecchiano le tue preferenze, e se per esempio imposti solo femmine, i maschi non potranno né commentare il tuo viaggio né vedere i commenti inseriti dagli utenti partecipanti.
-					</p>
-					<h3>Contatti in privato</h3>
-					<p style="text-align: justify">
-						Su Amici Viaggiando potrai contattare in privato gli altri utenti, utilizzando un sistema di messaggistica interna. Ricordati però che tutti i commenti e le esperienze di viaggio inserite dai nostri amici sono pubbliche ed è possibile inserire commenti e like.
-					</p>
-				</div>
-				<div class="col-md-6">
-					<div class="image"><img src="{{url}}/assets/images/avvenutura-amici.jpg" /></div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
 			</div>
 		</div>
 		<footer>

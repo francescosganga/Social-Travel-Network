@@ -24,6 +24,7 @@
 	$lang['follower'] = "follower";
 	$lang['following'] = "following"; 
 	$lang['welcome-back'] = "Bentornato";
+	$lang['how-it-works'] = "Come funziona";
 	$lang['on'] = "su";
 	$lang['maintenance-mode'] = "Piattaforma in manutenzione.";
 	$lang['copyright'] = "Copyright &copy; 2019 - All rights reserved.";
