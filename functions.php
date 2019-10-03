@@ -1,4 +1,5 @@
 <?php
+include("external/PHPMailer/PHPMailerAutoload.php");
 //@ini_set("display_errors", 1);
 session_start();
 
@@ -164,6 +165,23 @@ class AV {
 			
 		if(!$this->sendMail(Array($r['email'], "{$r['name']} {$r['surname']}"), $this->language['mail-verification-subject'], $this->language['mail-verification-content'])) 
 			return false;
+
+		return true;
+	}
+
+	public function sendLastTripNotify() {
+		$q = $this->MySQLi->query("SELECT id, title FROM {$this->config['mysql']['table_prefix']}trips ORDER BY id DESC LIMIT 1");
+		$trip = $q->fetch_array(MYSQLI_ASSOC);
+
+		$q = $this->MySQLi->query("SELECT username, name, surname, email FROM {$this->config['mysql']['table_prefix']}users LIMIT 5") or die($this->MySQLi->error);
+		while($r = $q->fetch_array(MYSQLI_ASSOC)) {
+			$trip_url = strtolower(str_replace(" ", "-", "https://www.amiciviaggiando.it/viaggi/{$trip['title']}-id{$trip['id']}/"));
+			$this->language['mail-notify-trip-content'] = str_replace("{{username}}", $r['username'], $this->language['mail-notify-trip-content']);
+			$this->language['mail-notify-trip-content'] = str_replace("{{trip_url}}", $trip_url, $this->language['mail-notify-trip-content']);
+
+			if(!$this->sendMail(Array($r['email'], "{$r['name']} {$r['surname']}"), $this->language['mail-notify-trip-subject'], $this->language['mail-notify-trip-content']))
+				return false;
+		}
 
 		return true;
 	}
@@ -418,8 +436,6 @@ class AV {
 	}
 
 	public function sendMail($to, $subject, $message) {
-		include("external/PHPMailer/PHPMailerAutoload.php");
-
 		$mail = new PHPMailer;
 		$mail->isSMTP();
 		$mail->Host = $this->config['mail_host'];
