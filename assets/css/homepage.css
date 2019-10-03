@@ -111,6 +111,14 @@ footer .row {
 		height: auto;
 	}
 
+	.homepage h1 {
+		font-size: 1.75rem;
+	}
+
+	.homepage h5 {
+		font-size: 1rem;
+	}
+
 	.homepage .row {
 		width: 95%;
 		padding-top: 30px;
@@ -125,8 +133,8 @@ footer .row {
 		width: 95%;
 	}
 
-	.signin-form {
+	.homepage .signin-form {
 		width: 100%;
-		padding: 10px 15px 10px 15px;
+		margin: 10px 15px 10px 15px;
 	}
 }
