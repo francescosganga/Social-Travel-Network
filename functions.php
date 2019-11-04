@@ -286,6 +286,7 @@ class AV {
 
 		while($r = $q->fetch_array(MYSQLI_ASSOC)) {
 			$r['slug'] = str_replace(" ", "-", strtolower($r['title'])) . "-id" . $r['id'];
+			$r['formattedDate'] = date($this->language['date-format'], $r['date']);
 			if($user_id == NULL) {
 				$trips[] = $r;
 			} else {
@@ -344,6 +345,7 @@ class AV {
 			return false;
 
 		$tripData = $q->fetch_array(MYSQLI_ASSOC);
+		$tripData['formattedDate'] = date($this->language['date-format'], $tripData['date']);
 		
 		if($partecipantsUnserialize == true) {
 			$tripData['partecipants'] = unserialize($tripData['partecipants']);

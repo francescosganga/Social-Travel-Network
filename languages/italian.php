@@ -66,3 +66,4 @@
 	$lang['not-found-string'] = "La pagina che stai cercando non esiste o non è più disponibile.";
 	$lang['mail-notify-trip-subject'] = "Nuovo viaggio inserito";
 	$lang['mail-notify-trip-content'] = "Ciao <strong>{{username}}</strong>,<br /><br />volevamo avvisarti che è stato inserito un nuovo viaggio da un utente. Puoi visualizzarlo al seguente indirizzo:<br /><a href='{{trip_url}}'>{{trip_url}}</a>";
+	$lang['date-format'] = "d-m-Y";

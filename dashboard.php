@@ -57,7 +57,8 @@ $AV->templateHeader("{lang['welcome-back']} {user['name']} {lang['on']} {{websit
 									</div>
 									<br />
 									<div class=\"destination\">
-										{$destination}
+										{$destination}<br />
+										{$trip['formattedDate']}
 									</div>
 								</div>
 								</a>

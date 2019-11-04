@@ -1,9 +1,11 @@
 		</div>
 		<footer>
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-4">
 					{lang['copyright']}
 				</div>
+				<div class="col-md-4"></div>
+				<div class="col-md-4"></div>
 			</div>
 		</footer>
 		<script type="text/javascript" src="//code.jquery.com/jquery-latest.js"></script>

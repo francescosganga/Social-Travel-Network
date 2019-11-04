@@ -35,6 +35,10 @@
 	margin-top: 50px;
 }
 
+.trip h2 {
+	font-size: 14px;
+}
+
 @media screen and (max-width: 600px) {
 	.trip .trip {
 		width: 95%;

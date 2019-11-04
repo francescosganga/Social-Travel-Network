@@ -50,6 +50,7 @@ $AV->templateHeader("{lang['trip']} {$tripData['title']}", $tripData['descriptio
 				<div class="row">
 					<div class="col-md-12">
 						<h1><?php print $tripData['title']; ?></h1>
+						<h2><?php print $tripData['formattedDate']; ?></h2>
 						<br />
 						<i>
 							<?php if($tripData['partecipants']['total'] == 1): ?>
