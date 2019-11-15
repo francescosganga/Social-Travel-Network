@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `av_options` (
-  `id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `option_name` varchar(255) NOT NULL,
   `option_value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -58,7 +58,7 @@ INSERT INTO `av_options` (`option_name`, `option_value`) VALUES
 --
 
 CREATE TABLE `av_users` (
-  `id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE `av_users` (
 --
 
 CREATE TABLE `av_trips` (
-  `id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `user_id` int(5) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE `av_trips` (
 --
 
 CREATE TABLE `av_comments` (
-  `id` int(5) AUTO_INCREMENT NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `trip_id` int(5) NOT NULL,
   `user_id` int(5) NOT NULL,
   `comment` varchar(255) NOT NULL,
