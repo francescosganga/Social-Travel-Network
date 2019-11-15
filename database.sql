@@ -47,7 +47,7 @@ INSERT INTO `av_options` (`id`, `option_name`, `option_value`) VALUES
 ('mail_host', 'mail_host'),
 ('mail_username', 'mail_username'),
 ('mail_port', 'mail_port'),
-('mail_password', 'mail_password');
+('mail_password', 'mail_password'),
 ('date_format', 'd-m-Y'),
 ('time_format', 'G:i');
 
