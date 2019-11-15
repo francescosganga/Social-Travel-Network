@@ -36,7 +36,7 @@ CREATE TABLE `av_options` (
 -- Dump dei dati per la tabella `av_options`
 --
 
-INSERT INTO `av_options` (`id`, `option_name`, `option_value`) VALUES
+INSERT INTO `av_options` (`option_name`, `option_value`) VALUES
 ('site_name', 'Social Travel Network'),
 ('site_domain', 'amiciviaggiando.it'),
 ('site_url', 'https://www.amiciviaggiando.it'),
